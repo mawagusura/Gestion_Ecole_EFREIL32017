@@ -2,16 +2,12 @@ package View;
 
 import javax.swing.*;
 
-public class LoginView extends JPanel{
-    private JFrame frame;
+public class LoginView extends JFrame{
     private JPanel id;
     private JPanel password;
 
     public LoginView(){
+        super();
 
-        this.frame = new JFrame("Login");
-        frame.setSize (300, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
     }
 }
