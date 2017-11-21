@@ -1,112 +1,139 @@
-package com.my.db;
+package Modele.Javabean;
+
+import java.sql.Date;
 
 public class Eleve {
-  private int matricule;
-  private String ville_naissance;
-  private String pays_naissance;
-  private int sexe;
-  private java.sql.Date date_inscription;
-  private String etablissement_precedent;
-  private java.sql.Date date_naissance;
-  private String nom;
-  private String prenom;
-  private int id_coord;
-  private int id_sante;
-  private int id_classe;
+    private int matricule;
+    private String ville_naissance;
+    private String pays_naissance;
+    private int sexe;
+    private java.sql.Date date_inscription;
+    private String etablissement_precedent;
+    private java.sql.Date date_naissance;
+    private String nom;
+    private String prenom;
+    private Coordonnees coord;
+    private Carnet_sante sante;
+    private Classe classe;
 
-  public int getMatricule() {
-    return matricule;
-  }
+    public Eleve(String ville_naissance, String pays_naissance, int sexe, Date date_inscription, String etablissement_precedent, Date date_naissance, String nom, String prenom, Coordonnees coord, Carnet_sante sante, Classe classe) {
+        this.ville_naissance = ville_naissance;
+        this.pays_naissance = pays_naissance;
+        this.sexe = sexe;
+        this.date_inscription = date_inscription;
+        this.etablissement_precedent = etablissement_precedent;
+        this.date_naissance = date_naissance;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.coord = coord;
+        this.sante = sante;
+        this.classe = classe;
+    }
 
-  public void setMatricule(int matricule) {
-    this.matricule = matricule;
-  }
+    public Eleve(int matricule, String ville_naissance, String pays_naissance, int sexe, Date date_inscription, String etablissement_precedent, Date date_naissance, String nom, String prenom, Coordonnees coord, Carnet_sante sante, Classe classe) {
+        this.matricule = matricule;
+        this.ville_naissance = ville_naissance;
+        this.pays_naissance = pays_naissance;
+        this.sexe = sexe;
+        this.date_inscription = date_inscription;
+        this.etablissement_precedent = etablissement_precedent;
+        this.date_naissance = date_naissance;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.coord = coord;
+        this.sante = sante;
+        this.classe = classe;
+    }
 
-  public String getVille_naissance() {
-    return ville_naissance;
-  }
+    public int getMatricule() {
+        return matricule;
+    }
 
-  public void setVille_naissance(String ville_naissance) {
-    this.ville_naissance = ville_naissance;
-  }
+    public String getVille_naissance() {
+        return ville_naissance;
+    }
 
-  public String getPays_naissance() {
-    return pays_naissance;
-  }
+    public void setVille_naissance(String ville_naissance) {
+        this.ville_naissance = ville_naissance;
+    }
 
-  public void setPays_naissance(String pays_naissance) {
-    this.pays_naissance = pays_naissance;
-  }
+    public String getPays_naissance() {
+        return pays_naissance;
+    }
 
-  public int getSexe() {
-    return sexe;
-  }
+    public void setPays_naissance(String pays_naissance) {
+        this.pays_naissance = pays_naissance;
+    }
 
-  public void setSexe(int sexe) {
-    this.sexe = sexe;
-  }
+    public int getSexe() {
+        return sexe;
+    }
 
-  public java.sql.Date getDate_inscription() {
-    return date_inscription;
-  }
+    public void setSexe(int sexe) {
+        this.sexe = sexe;
+    }
 
-  public void setDate_inscription(java.sql.Date date_inscription) {
-    this.date_inscription = date_inscription;
-  }
+    public java.sql.Date getDate_inscription() {
+        return date_inscription;
+    }
 
-  public String getEtablissement_precedent() {
-    return etablissement_precedent;
-  }
+    public void setDate_inscription(java.sql.Date date_inscription) {
+        this.date_inscription = date_inscription;
+    }
 
-  public void setEtablissement_precedent(String etablissement_precedent) {
-    this.etablissement_precedent = etablissement_precedent;
-  }
+    public String getEtablissement_precedent() {
+        return etablissement_precedent;
+    }
 
-  public java.sql.Date getDate_naissance() {
-    return date_naissance;
-  }
+    public void setEtablissement_precedent(String etablissement_precedent) {
+        this.etablissement_precedent = etablissement_precedent;
+    }
 
-  public void setDate_naissance(java.sql.Date date_naissance) {
-    this.date_naissance = date_naissance;
-  }
+    public java.sql.Date getDate_naissance() {
+        return date_naissance;
+    }
 
-  public String getNom() {
-    return nom;
-  }
+    public void setDate_naissance(java.sql.Date date_naissance) {
+        this.date_naissance = date_naissance;
+    }
 
-  public void setNom(String nom) {
-    this.nom = nom;
-  }
+    public String getNom() {
+        return nom;
+    }
 
-  public String getPrenom() {
-    return prenom;
-  }
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 
-  public void setPrenom(String prenom) {
-    this.prenom = prenom;
-  }
+    public String getPrenom() {
+        return prenom;
+    }
 
-  public int getId_coord() {
-    return id_coord;
-  }
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
 
-  public void setId_coord(int id_coord) {
-    this.id_coord = id_coord;
-  }
+    public Coordonnees getCoord() {
+        return coord;
+    }
 
-  public int getId_sante() {
-    return id_sante;
-  }
+    public void setCoord(Coordonnees coord) {
+        this.coord = coord;
+    }
 
-  public void setId_sante(int id_sante) {
-    this.id_sante = id_sante;
-  }
+    public Carnet_sante getSante() {
+        return sante;
+    }
 
-  public int getId_classe() {
-    return id_classe;
-  }
+    public void setSante(Carnet_sante sante) {
+        this.sante = sante;
+    }
 
-  public void setId_classe(int id_classe) {
-    this.id_classe = id_classe;
-  }
+    public Classe getClasse() {
+        return classe;
+    }
+
+    public void setClasse(Classe classe) {
+        this.classe = classe;
+    }
 }

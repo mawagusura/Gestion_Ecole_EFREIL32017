@@ -1,31 +1,31 @@
-package com.my.db;
+package Modele.Javabean;
 
 public class Niveau_classe {
-  private int id_niveau;
-  private String nom;
-  private int id_classe;
+    private int id_niveau;
+    private String nom;
 
-  public int getId_niveau() {
-    return id_niveau;
-  }
+    public Niveau_classe(int id_niveau, String nom) {
+        this.id_niveau = id_niveau;
+        this.nom = nom;
+    }
 
-  public void setId_niveau(int id_niveau) {
-    this.id_niveau = id_niveau;
-  }
+    public Niveau_classe(String nom) {
+        this.nom = nom;
+    }
 
-  public String getNom() {
-    return nom;
-  }
+    public int getId_niveau() {
+        return id_niveau;
+    }
 
-  public void setNom(String nom) {
-    this.nom = nom;
-  }
+    public void setId_niveau(int id_niveau) {
+        this.id_niveau = id_niveau;
+    }
 
-  public int getId_classe() {
-    return id_classe;
-  }
+    public String getNom() {
+        return nom;
+    }
 
-  public void setId_classe(int id_classe) {
-    this.id_classe = id_classe;
-  }
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 }
