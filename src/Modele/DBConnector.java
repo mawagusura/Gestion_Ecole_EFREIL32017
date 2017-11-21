@@ -7,39 +7,45 @@ import java.sql.SQLException;
 
 public class DBConnector {
 
-    private static DBConnector Instance = null;
-    private static Connection conn;
+    // URL de connexion
+    private String url = "jdbc:mysql://h0tmilk.fr:3306/gestion_ecole";
 
-    /**
-     *
-     * @return
-     */
-    public static DBConnector connect(){
-        if(Instance == null) {
-            Instance = new DBConnector();
+    // Nom USER
+    private String user = "efrei-remote";
+
+    // Mot de passe utilisateur
+    private String passwd = "3fr3!";
+
+    // Objet connexion
+    private static Connection connect;
+
+    //Constructeur privé
+    private DBConnector(){
+        try {
+            connect = DriverManager.getConnection(url, user, passwd);
+            System.out.println("Connecté à la base de données.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Erreur de connexion à la base de données.");
         }
-        return Instance;
     }
 
-    private DBConnector() {
-        try {
-            this.conn = DriverManager.getConnection("jdbc:mysql://h0tmilk.fr:3306/gestion_ecole", "efrei-remote", "3fr3!");
-            System.out.println("Connecté");
+    // Méthode qui va nous retourner notre instance et la créer si elle n'existe pas
+    public static Connection getInstance() {
+        if (connect == null) {
+            new DBConnector();
         }
-        catch (SQLException e){
-            e.printStackTrace();
-            System.out.println("Impossible de se connecter à la base de données");
-        }
+        return connect;
     }
 
     public void close(){
         try {
-            this.conn.close();
-            System.out.println("Déconnecté");
+            this.connect.close();
+            System.out.println("Déconnecté.");
         }
         catch (SQLException e){
             e.printStackTrace();
-            System.out.println("Impossible de se déconnecter de la base de données");
+            System.out.println("Impossible de se déconnecter de la base de données.");
         }
     }
 
