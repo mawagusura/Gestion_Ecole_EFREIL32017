@@ -2,7 +2,7 @@ package Login;
 
 import javax.swing.*;
 
-public class LoginView {
+public class LoginView extends JPanel{
     private JFrame frame;
     private JPanel id;
     private JPanel password;
