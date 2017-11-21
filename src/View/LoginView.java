@@ -5,14 +5,13 @@ import Controller.Controller;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 
-public class LoginView extends JFrame implements ActionListener{
-    JTextField loginTF = new JTextField();
-    JTextField mdpTF = new JTextField();
+
+public class LoginView extends JFrame{
+    JTextField loginTF = new JTextField("michel.dumas@gmail.com");
+    JTextField mdpTF = new JTextField("1234");
     JButton connectBT = new JButton("Connexion");
 
     public LoginView(){
@@ -22,13 +21,31 @@ public class LoginView extends JFrame implements ActionListener{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.setContentPane(this.draw());
-        this.connectBT.addActionListener(this);
+        //this.connectBT.addActionListener(this);
 
         this.mdpTF.setPreferredSize(new Dimension(150,30));
         this.loginTF.setPreferredSize(new Dimension(150,30));
 
+        this.connectBT.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "Enter");
+
+        Action action = new AbstractAction()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                test();
+            }
+        };
+        this.connectBT.getActionMap().put("Enter", action);
+        this.connectBT.addActionListener(action);
+
         this.setVisible(true);
     }
+
+    private void test(){
+        Controller.connect(this,
+                this.loginTF.getText(),
+                this.mdpTF.getText());    }
 
     private JPanel draw(){
 
@@ -59,13 +76,6 @@ public class LoginView extends JFrame implements ActionListener{
         container.add(content, BorderLayout.CENTER);
 
         return container;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e){
-            Controller.connect(this,
-                    this.loginTF.getText(),
-                    this.mdpTF.getText());
     }
 
     public void throwPopup (String s){
