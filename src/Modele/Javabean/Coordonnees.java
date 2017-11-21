@@ -9,25 +9,6 @@ public class Coordonnees {
     private String mail;
     private Eleve eleve;
 
-    public Coordonnees(String adresse, String ville, String tel_mobile, String tel_fixe, String mail, Eleve eleve) {
-        this.adresse = adresse;
-        this.ville = ville;
-        this.tel_mobile = tel_mobile;
-        this.tel_fixe = tel_fixe;
-        this.mail = mail;
-        this.eleve = eleve;
-    }
-
-    public Coordonnees(int id_coord, String adresse, String ville, String tel_mobile, String tel_fixe, String mail, Eleve eleve) {
-        this.id_coord = id_coord;
-        this.adresse = adresse;
-        this.ville = ville;
-        this.tel_mobile = tel_mobile;
-        this.tel_fixe = tel_fixe;
-        this.mail = mail;
-        this.eleve = eleve;
-    }
-
     public int getId_coord() {
         return id_coord;
     }

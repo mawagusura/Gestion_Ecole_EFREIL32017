@@ -4,15 +4,6 @@ public class Privilege {
     private int id_privilege;
     private String libelle;
 
-    public Privilege(int id_privilege, String libelle) {
-        this.id_privilege = id_privilege;
-        this.libelle = libelle;
-    }
-
-    public Privilege(String libelle) {
-        this.libelle = libelle;
-    }
-
     public int getId_privilege() {
         return id_privilege;
     }

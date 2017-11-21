@@ -8,25 +8,12 @@ public class Carnet_sante {
     private String allergies;
     private Eleve eleve;
 
-    public Carnet_sante(String medecin_traitement, String telephone_medecin, String vaccinations, String allergies, Eleve eleve) {
-        this.medecin_traitement = medecin_traitement;
-        this.telephone_medecin = telephone_medecin;
-        this.vaccinations = vaccinations;
-        this.allergies = allergies;
-        this.eleve = eleve;
-    }
-
-    public Carnet_sante(int id_sante, String medecin_traitement, String telephone_medecin, String vaccinations, String allergies, Eleve eleve) {
-        this.id_sante = id_sante;
-        this.medecin_traitement = medecin_traitement;
-        this.telephone_medecin = telephone_medecin;
-        this.vaccinations = vaccinations;
-        this.allergies = allergies;
-        this.eleve = eleve;
-    }
-
     public int getId_sante() {
         return id_sante;
+    }
+
+    public void setId_sante(int id_sante) {
+        this.id_sante = id_sante;
     }
 
     public String getMedecin_traitement() {
@@ -68,5 +55,4 @@ public class Carnet_sante {
     public void setEleve(Eleve eleve) {
         this.eleve = eleve;
     }
-
 }

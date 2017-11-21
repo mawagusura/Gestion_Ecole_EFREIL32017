@@ -16,37 +16,12 @@ public class Eleve {
     private Carnet_sante sante;
     private Classe classe;
 
-    public Eleve(String ville_naissance, String pays_naissance, int sexe, Date date_inscription, String etablissement_precedent, Date date_naissance, String nom, String prenom, Coordonnees coord, Carnet_sante sante, Classe classe) {
-        this.ville_naissance = ville_naissance;
-        this.pays_naissance = pays_naissance;
-        this.sexe = sexe;
-        this.date_inscription = date_inscription;
-        this.etablissement_precedent = etablissement_precedent;
-        this.date_naissance = date_naissance;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.coord = coord;
-        this.sante = sante;
-        this.classe = classe;
-    }
-
-    public Eleve(int matricule, String ville_naissance, String pays_naissance, int sexe, Date date_inscription, String etablissement_precedent, Date date_naissance, String nom, String prenom, Coordonnees coord, Carnet_sante sante, Classe classe) {
-        this.matricule = matricule;
-        this.ville_naissance = ville_naissance;
-        this.pays_naissance = pays_naissance;
-        this.sexe = sexe;
-        this.date_inscription = date_inscription;
-        this.etablissement_precedent = etablissement_precedent;
-        this.date_naissance = date_naissance;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.coord = coord;
-        this.sante = sante;
-        this.classe = classe;
-    }
-
     public int getMatricule() {
         return matricule;
+    }
+
+    public void setMatricule(int matricule) {
+        this.matricule = matricule;
     }
 
     public String getVille_naissance() {
@@ -73,11 +48,11 @@ public class Eleve {
         this.sexe = sexe;
     }
 
-    public java.sql.Date getDate_inscription() {
+    public Date getDate_inscription() {
         return date_inscription;
     }
 
-    public void setDate_inscription(java.sql.Date date_inscription) {
+    public void setDate_inscription(Date date_inscription) {
         this.date_inscription = date_inscription;
     }
 
@@ -89,11 +64,11 @@ public class Eleve {
         this.etablissement_precedent = etablissement_precedent;
     }
 
-    public java.sql.Date getDate_naissance() {
+    public Date getDate_naissance() {
         return date_naissance;
     }
 
-    public void setDate_naissance(java.sql.Date date_naissance) {
+    public void setDate_naissance(Date date_naissance) {
         this.date_naissance = date_naissance;
     }
 

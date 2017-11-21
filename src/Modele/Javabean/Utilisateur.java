@@ -8,23 +8,6 @@ public class Utilisateur {
   private String hash_mdp;
   private Privilege privilege;
 
-  public Utilisateur(int id_utilisateur, String mail, String nom, String prenom, String hash_mdp, Privilege privilege) {
-    this.id_utilisateur = id_utilisateur;
-    this.mail = mail;
-    this.nom = nom;
-    this.prenom = prenom;
-    this.hash_mdp = hash_mdp;
-    this.privilege = privilege;
-  }
-
-  public Utilisateur(String mail, String nom, String prenom, String hash_mdp, Privilege privilege) {
-    this.mail = mail;
-    this.nom = nom;
-    this.prenom = prenom;
-    this.hash_mdp = hash_mdp;
-    this.privilege = privilege;
-  }
-
   public int getId_utilisateur() {
     return id_utilisateur;
   }

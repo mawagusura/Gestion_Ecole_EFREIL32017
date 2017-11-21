@@ -5,17 +5,6 @@ public class Classe {
     private String nom;
     private Niveau_classe niveau;
 
-    public Classe(String nom, Niveau_classe niveau) {
-        this.nom = nom;
-        this.niveau = niveau;
-    }
-
-    public Classe(int id_classe, String nom, Niveau_classe niveau) {
-        this.id_classe = id_classe;
-        this.nom = nom;
-        this.niveau = niveau;
-    }
-
     public int getId_classe() {
         return id_classe;
     }

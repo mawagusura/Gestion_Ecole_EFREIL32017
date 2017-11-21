@@ -5,10 +5,12 @@ public class Suit {
   private Eleve eleve;
   private Matiere matiere;
 
-  public Suit(Double coefficient, Eleve eleve, Matiere matiere) {
+  public Double getCoefficient() {
+    return coefficient;
+  }
+
+  public void setCoefficient(Double coefficient) {
     this.coefficient = coefficient;
-    this.eleve = eleve;
-    this.matiere = matiere;
   }
 
   public Eleve getEleve() {
@@ -25,13 +27,5 @@ public class Suit {
 
   public void setMatiere(Matiere matiere) {
     this.matiere = matiere;
-  }
-
-  public Double getCoefficient() {
-    return coefficient;
-  }
-
-  public void setCoefficient(Double coefficient) {
-    this.coefficient = coefficient;
   }
 }
