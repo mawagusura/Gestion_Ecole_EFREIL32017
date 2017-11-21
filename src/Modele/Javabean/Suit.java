@@ -1,9 +1,31 @@
-package com.my.db;
+package Modele.Javabean;
 
 public class Suit {
   private Double coefficient;
-  private int matricule;
-  private int id_matiere;
+  private Eleve eleve;
+  private Matiere matiere;
+
+  public Suit(Double coefficient, Eleve eleve, Matiere matiere) {
+    this.coefficient = coefficient;
+    this.eleve = eleve;
+    this.matiere = matiere;
+  }
+
+  public Eleve getEleve() {
+    return eleve;
+  }
+
+  public void setEleve(Eleve eleve) {
+    this.eleve = eleve;
+  }
+
+  public Matiere getMatiere() {
+    return matiere;
+  }
+
+  public void setMatiere(Matiere matiere) {
+    this.matiere = matiere;
+  }
 
   public Double getCoefficient() {
     return coefficient;
@@ -11,21 +33,5 @@ public class Suit {
 
   public void setCoefficient(Double coefficient) {
     this.coefficient = coefficient;
-  }
-
-  public int getMatricule() {
-    return matricule;
-  }
-
-  public void setMatricule(int matricule) {
-    this.matricule = matricule;
-  }
-
-  public int getId_matiere() {
-    return id_matiere;
-  }
-
-  public void setId_matiere(int id_matiere) {
-    this.id_matiere = id_matiere;
   }
 }

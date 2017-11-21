@@ -1,22 +1,27 @@
-package com.my.db;
+package Modele.Javabean;
 
 public class Est_responsable_de {
-  private int id_responsable;
-  private int matricule;
+  private Responsable responsable;
+  private Eleve eleve;
 
-  public int getId_responsable() {
-    return id_responsable;
+  public Est_responsable_de(Responsable responsable, Eleve eleve) {
+    this.responsable = responsable;
+    this.eleve = eleve;
   }
 
-  public void setId_responsable(int id_responsable) {
-    this.id_responsable = id_responsable;
+  public Responsable getResponsable() {
+    return responsable;
   }
 
-  public int getMatricule() {
-    return matricule;
+  public void setResponsable(Responsable responsable) {
+    this.responsable = responsable;
   }
 
-  public void setMatricule(int matricule) {
-    this.matricule = matricule;
+  public Eleve getEleve() {
+    return eleve;
+  }
+
+  public void setEleve(Eleve eleve) {
+    this.eleve = eleve;
   }
 }

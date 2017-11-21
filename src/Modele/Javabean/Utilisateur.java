@@ -1,4 +1,4 @@
-package com.my.db;
+package Modele.Javabean;
 
 public class Utilisateur {
   private int id_utilisateur;
@@ -6,7 +6,24 @@ public class Utilisateur {
   private String nom;
   private String prenom;
   private String hash_mdp;
-  private int id_privilege;
+  private Privilege privilege;
+
+  public Utilisateur(int id_utilisateur, String mail, String nom, String prenom, String hash_mdp, Privilege privilege) {
+    this.id_utilisateur = id_utilisateur;
+    this.mail = mail;
+    this.nom = nom;
+    this.prenom = prenom;
+    this.hash_mdp = hash_mdp;
+    this.privilege = privilege;
+  }
+
+  public Utilisateur(String mail, String nom, String prenom, String hash_mdp, Privilege privilege) {
+    this.mail = mail;
+    this.nom = nom;
+    this.prenom = prenom;
+    this.hash_mdp = hash_mdp;
+    this.privilege = privilege;
+  }
 
   public int getId_utilisateur() {
     return id_utilisateur;
@@ -48,11 +65,11 @@ public class Utilisateur {
     this.hash_mdp = hash_mdp;
   }
 
-  public int getId_privilege() {
-    return id_privilege;
+  public Privilege getPrivilege() {
+    return privilege;
   }
 
-  public void setId_privilege(int id_privilege) {
-    this.id_privilege = id_privilege;
+  public void setPrivilege(Privilege privilege) {
+    this.privilege = privilege;
   }
 }

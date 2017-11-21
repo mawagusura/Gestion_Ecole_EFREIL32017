@@ -1,11 +1,26 @@
-package com.my.db;
+package Modele.Javabean;
 
 public class Note {
   private int id_note;
   private String libelle;
   private Double note;
-  private int id_matiere;
-  private int matricule;
+  private Matiere matiere;
+  private Eleve eleve;
+
+  public Note(int id_note, String libelle, Double note, Matiere matiere, Eleve eleve) {
+    this.id_note = id_note;
+    this.libelle = libelle;
+    this.note = note;
+    this.matiere = matiere;
+    this.eleve = eleve;
+  }
+
+  public Note(String libelle, Double note, Matiere matiere, Eleve eleve) {
+    this.libelle = libelle;
+    this.note = note;
+    this.matiere = matiere;
+    this.eleve = eleve;
+  }
 
   public int getId_note() {
     return id_note;
@@ -31,19 +46,19 @@ public class Note {
     this.note = note;
   }
 
-  public int getId_matiere() {
-    return id_matiere;
+  public Matiere getMatiere() {
+    return matiere;
   }
 
-  public void setId_matiere(int id_matiere) {
-    this.id_matiere = id_matiere;
+  public void setMatiere(Matiere matiere) {
+    this.matiere = matiere;
   }
 
-  public int getMatricule() {
-    return matricule;
+  public Eleve getEleve() {
+    return eleve;
   }
 
-  public void setMatricule(int matricule) {
-    this.matricule = matricule;
+  public void setEleve(Eleve eleve) {
+    this.eleve = eleve;
   }
 }
