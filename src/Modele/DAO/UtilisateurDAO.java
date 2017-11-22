@@ -1,8 +1,7 @@
 package Modele.DAO;
 
-import Modele.DBConnector;
-import Modele.Javabean.Privilege;
-import Modele.Javabean.Utilisateur;
+import Modele.JavaBean.Privilege;
+import Modele.JavaBean.Utilisateur;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -79,7 +78,7 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
                 u.setHash_mdp(resultSet.getString("hash_mdp"));
 
                 PrivilegeDAO p = new PrivilegeDAO(this.connect);
-                u.setPrivilege(p.find(resultSet.getInt("id_privilege")));
+                u.setId_privilege(resultSet.getInt("id_privilege"));
                 return u;
             }
         } catch (SQLException e) {

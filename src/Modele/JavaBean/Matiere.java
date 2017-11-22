@@ -1,4 +1,4 @@
-package Modele.Javabean;
+package Modele.JavaBean;
 
 public class Matiere {
   private int id_matiere;

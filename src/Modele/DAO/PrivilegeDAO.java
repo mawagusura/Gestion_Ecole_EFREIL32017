@@ -1,7 +1,6 @@
 package Modele.DAO;
 
-import Modele.DBConnector;
-import Modele.Javabean.Privilege;
+import Modele.JavaBean.Privilege;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

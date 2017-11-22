@@ -2,7 +2,7 @@ package Controller;
 
 import Modele.DAO.UtilisateurDAO;
 import Modele.DBConnector;
-import Modele.Javabean.Utilisateur;
+import Modele.JavaBean.Utilisateur;
 import View.LoginView;
 import View.MainFrame;
 

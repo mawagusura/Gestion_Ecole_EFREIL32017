@@ -5,7 +5,7 @@ import java.security.NoSuchAlgorithmException;
 
 import Modele.DAO.UtilisateurDAO;
 import Modele.DBConnector;
-import Modele.Javabean.Utilisateur;
+import Modele.JavaBean.Utilisateur;
 
 public class UtilisateurService {
 

@@ -1,4 +1,4 @@
-package Modele.Javabean;
+package Modele.JavaBean;
 
 public class Utilisateur {
   private int id_utilisateur;
@@ -6,7 +6,7 @@ public class Utilisateur {
   private String nom;
   private String prenom;
   private String hash_mdp;
-  private Privilege privilege;
+  private int id_privilege;
 
   public int getId_utilisateur() {
     return id_utilisateur;
@@ -48,11 +48,11 @@ public class Utilisateur {
     this.hash_mdp = hash_mdp;
   }
 
-  public Privilege getPrivilege() {
-    return privilege;
+  public int getId_privilege() {
+    return id_privilege;
   }
 
-  public void setPrivilege(Privilege privilege) {
-    this.privilege = privilege;
+  public void setId_privilege(int id_privilege) {
+    this.id_privilege = id_privilege;
   }
 }
