@@ -37,7 +37,7 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
 
             // Préparation et exécution de la requête
             Statement stmnt;
-            stmnt = DBConnector.getInstance().createStatement();
+            stmnt = connect.createStatement();
             ResultSet resultSet = stmnt.executeQuery("SELECT * FROM Utilisateur WHERE id = " + id);
 
             // Exploitation du résultat
@@ -55,7 +55,7 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
 
             // Préparation et exécution de la requête
             Statement stmnt;
-            stmnt = DBConnector.getInstance().createStatement();
+            stmnt = connect.createStatement();
             ResultSet resultSet = stmnt.executeQuery("SELECT * FROM Utilisateur WHERE mail = \"" + mail + "\"");
 
             // Exploitation du résultat

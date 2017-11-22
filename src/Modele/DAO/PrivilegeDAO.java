@@ -34,7 +34,7 @@ public class PrivilegeDAO extends DAO<Privilege> {
         try {
             // Préparation et exécution de la requête
             Statement stmnt;
-            stmnt = DBConnector.getInstance().createStatement();
+            stmnt = connect.createStatement();
             ResultSet resultSet = stmnt.executeQuery("SELECT * FROM privilege WHERE id_privilege = " + id);
 
             // Exploitation du résultat

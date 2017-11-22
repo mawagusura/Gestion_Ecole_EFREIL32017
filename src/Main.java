@@ -1,18 +1,26 @@
-import Modele.*;
-import Modele.Javabean.*;
-import Modele.DAO.*;
+import Modele.Javabean.Utilisateur;
+import Modele.Services.UtilisateurService;
 
 public class Main {
 
     public static void main(String[] args){
-        UtilisateurDAO utilisateurDao = new UtilisateurDAO(DBConnector.getInstance());
-        Utilisateur exemple = utilisateurDao.find("michel.dumas@gmail.com");
+        // Login
+        String mail = "michel.dumas@gmail.com";
+        String mdp = "1234";
 
-        System.out.println("Utilisateur n°" + exemple.getId_utilisateur());
-        System.out.println("Nom : " + exemple.getNom());
-        System.out.println("Prénom : " + exemple.getPrenom());
-        System.out.println("Mot de passe : " + exemple.getHash_mdp());
-        System.out.println("Adresse mail : " + exemple.getMail());
-        System.out.println("Privilèges : " + exemple.getPrivilege().getLibelle() + "(" + exemple.getPrivilege().getId_privilege() + ")");
+        // Initialisation du service
+        UtilisateurService userService = new UtilisateurService();
+
+        // Récupération de l'user
+        Utilisateur u = userService.getUtilisateur(mail);
+
+        // Vérification du mot de passe
+        if (userService.verifyPassword(userService.getUtilisateur(mail), mdp)) {
+            System.out.println("Mot de passe correct.");
+        } else {
+            System.out.println("Mot de passe incorrect.");
+        }
+
     }
+
 }
