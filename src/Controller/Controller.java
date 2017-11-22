@@ -1,18 +1,17 @@
 package Controller;
 
-import Modele.Database;
+import Modele.DAO.UtilisateurDAO;
+import Modele.DBConnector;
 import Modele.Javabean.Utilisateur;
 import View.LoginView;
 import View.MainFrame;
-
-import java.awt.event.WindowEvent;
 
 public class Controller {
 
     public static void connect(LoginView loginView, String id, String mdp){
         if(!id.isEmpty() && !mdp.isEmpty()){
-            Utilisateur user = Database.getUtilisateur(id);
-
+            UtilisateurDAO userDao = new UtilisateurDAO(DBConnector.getInstance());
+            Utilisateur user = userDao.find(id);
 
             loginView.dispose();
             MainFrame appli = new MainFrame();
