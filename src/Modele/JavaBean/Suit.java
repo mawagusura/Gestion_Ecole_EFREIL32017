@@ -1,15 +1,15 @@
 package Modele.JavaBean;
 
 public class Suit {
-  private Double coefficient;
+  private Float coefficient;
   private int matricule;
   private int id_matiere;
 
-  public Double getCoefficient() {
+  public Float getCoefficient() {
     return coefficient;
   }
 
-  public void setCoefficient(Double coefficient) {
+  public void setCoefficient(Float coefficient) {
     this.coefficient = coefficient;
   }
 

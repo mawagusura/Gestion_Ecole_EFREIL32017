@@ -70,7 +70,7 @@ public class Main {
             System.out.println("Classe : " + clS.getClasse(e.getId_classe()).getNom());
             System.out.println("Responsables : ");
             for (Responsable r:rS.getResponsables(e)) {
-                System.out.println(" - " + r.getPrenom() + " " + r.getNom());
+                System.out.println(" - " + r.getPrenom() + " " + r.getNom().toUpperCase());
             }
         } catch (NullPointerException ex) {
             System.err.println("Aucun élève d'a pour id 15");
