@@ -6,7 +6,7 @@ import Modele.JavaBean.Coordonnees;
 
 public class CoordonneesService {
 
-    public CoordonneesDAO dao;
+    private CoordonneesDAO dao;
 
     public CoordonneesService() {
         this.dao = new CoordonneesDAO(DBConnector.getInstance());

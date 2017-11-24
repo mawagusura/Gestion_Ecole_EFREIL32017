@@ -1,9 +1,7 @@
 import Modele.JavaBean.Eleve;
+import Modele.JavaBean.Responsable;
 import Modele.JavaBean.Utilisateur;
-import Modele.Services.CoordonneesService;
-import Modele.Services.EleveService;
-import Modele.Services.PrivilegeService;
-import Modele.Services.UtilisateurService;
+import Modele.Services.*;
 
 public class Main {
 
@@ -54,17 +52,26 @@ public class Main {
         System.out.println("\n-----------------------------");
 
         // Chargement des services
-        EleveService es = new EleveService();
-        CoordonneesService cs = new CoordonneesService();
+        EleveService eS = new EleveService();
+        CoordonneesService coS = new CoordonneesService();
+        CarnetSanteService caS = new CarnetSanteService();
+        ClasseService clS = new ClasseService();
+        ResponsableService rS = new ResponsableService();
 
         // Récupération de l'élève 1
-        Eleve e = es.getEleve(15);
+        Eleve e = eS.getEleve(15);
 
         try {
             System.out.println("\nElève n°15 :");
             System.out.println("Nom : "+ e.getNom());
             System.out.println("Prenom : "+ e.getPrenom());
-            System.out.println("Téléphone fixe : " + cs.getCoordonnees(e.getId_coord()).getTel_fixe());
+            System.out.println("Téléphone fixe : " + coS.getCoordonnees(e.getId_coord()).getTel_fixe());
+            System.out.println("Médecin traitant : "+ caS.getCarnetSante(e.getId_sante()).getMedecin_traitement());
+            System.out.println("Classe : " + clS.getClasse(e.getId_classe()).getNom());
+            System.out.println("Responsables : ");
+            for (Responsable r:rS.getResponsables(e)) {
+                System.out.println(" - " + r.getPrenom() + " " + r.getNom());
+            }
         } catch (NullPointerException ex) {
             System.err.println("Aucun élève d'a pour id 15");
         }
