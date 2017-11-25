@@ -3,6 +3,9 @@ package Modele.Services;
 import Modele.DAO.EleveDAO;
 import Modele.DBConnector;
 import Modele.JavaBean.Eleve;
+import Modele.JavaBean.Matiere;
+
+import java.util.ArrayList;
 
 public class EleveService {
 
@@ -16,4 +19,7 @@ public class EleveService {
         return dao.find(id);
     }
 
+    public ArrayList<Eleve> getEleves(Matiere m) {
+        return dao.findByMatiere(m.getId_matiere());
+    }
 }

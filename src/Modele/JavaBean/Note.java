@@ -2,10 +2,10 @@ package Modele.JavaBean;
 
 public class Note {
   private int id_note;
-  private String libelle;
-  private Double note;
-  private int id_matiere;
+  private float coefficient;
   private int matricule;
+  private int id_matiere;
+  private float note;
 
   public int getId_note() {
     return id_note;
@@ -15,20 +15,20 @@ public class Note {
     this.id_note = id_note;
   }
 
-  public String getLibelle() {
-    return libelle;
+  public float getCoefficient() {
+    return coefficient;
   }
 
-  public void setLibelle(String libelle) {
-    this.libelle = libelle;
+  public void setCoefficient(float coefficient) {
+    this.coefficient = coefficient;
   }
 
-  public Double getNote() {
-    return note;
+  public int getMatricule() {
+    return matricule;
   }
 
-  public void setNote(Double note) {
-    this.note = note;
+  public void setMatricule(int matricule) {
+    this.matricule = matricule;
   }
 
   public int getId_matiere() {
@@ -39,11 +39,11 @@ public class Note {
     this.id_matiere = id_matiere;
   }
 
-  public int getMatricule() {
-    return matricule;
+  public float getNote() {
+    return note;
   }
 
-  public void setMatricule(int matricule) {
-    this.matricule = matricule;
+  public void setNote(float note) {
+    this.note = note;
   }
 }

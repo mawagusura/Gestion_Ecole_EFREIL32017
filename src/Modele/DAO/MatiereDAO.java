@@ -1,7 +1,7 @@
 package Modele.DAO;
 
+import Modele.JavaBean.Eleve;
 import Modele.JavaBean.Matiere;
-import Modele.JavaBean.Suit;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -51,28 +51,34 @@ public class MatiereDAO extends DAO<Matiere> {
         return null;
     }
 
-    // Retourne une liste des relations matière / élève (classe Suit)
-    public ArrayList<Suit> findMatieres(int id_eleve) {
+    public ArrayList<Matiere> findByEleve(int id_eleve) {
         try {
+
             // Préparation et exécution de la requête
             Statement stmnt;
             stmnt = connect.createStatement();
-            ResultSet resultSet = stmnt.executeQuery("SELECT * FROM suit WHERE matricule = " + id_eleve);
+            ResultSet resultSet = stmnt.executeQuery(
+                    "SELECT * FROM Matiere WHERE id_matiere IN (" +
+                            "SELECT id_matiere FROM suit WHERE matricule = "+ id_eleve +")"
+            );
 
-            // Arraylist des relatoins matières / élèves
-            ArrayList<Suit> matieres = new ArrayList<Suit>();
+            // Array contenant les eleves
+            ArrayList<Matiere> matieres = new ArrayList<Matiere>();
 
             // Exploitation du résultat
             while (resultSet.next()) {
-                Suit s = new Suit();
-                s.setMatricule(resultSet.getInt("matricule"));
-                s.setId_matiere(resultSet.getInt("id_matiere"));
-                s.setCoefficient(resultSet.getFloat("coefficient"));
-                matieres.add(s);
+                Matiere m = new Matiere();
+                m.setId_matiere(resultSet.getInt("id_matiere"));
+                m.setNom_matiere(resultSet.getString("nom_matiere"));
+                matieres.add(m);
             }
-        } catch(SQLException e) {
-            System.err.println("Erreur SQL");
+
+            return matieres;
+
+        } catch (SQLException ex) {
+            System.err.println("Erreur SQL.");
         }
+
         return null;
     }
 }
