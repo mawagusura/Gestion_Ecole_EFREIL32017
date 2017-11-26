@@ -4,6 +4,8 @@ import Modele.DBConnector;
 import Modele.JavaBean.Privilege;
 import Modele.DAO.PrivilegeDAO;
 
+import java.util.ArrayList;
+
 public class PrivilegeService {
     private PrivilegeDAO dao;
 
@@ -12,7 +14,11 @@ public class PrivilegeService {
     }
 
     public Privilege getPrivilege(int id_privilege) {
-        return this.dao.find(id_privilege);
+        return dao.find(id_privilege);
+    }
+
+    public ArrayList<Privilege> getAllPrivileges() {
+        return dao.findAll();
     }
 
 }

@@ -56,6 +56,37 @@ public class NoteDAO extends DAO<Note> {
         return null;
     }
 
+    @Override
+    public ArrayList<Note> findAll() {
+        try {
+            // Préparation et exécution de la requête
+            Statement stmnt;
+            stmnt = connect.createStatement();
+            ResultSet resultSet = stmnt.executeQuery("SELECT * FROM Note");
+
+            // Arraylist des notes de l'élève
+            ArrayList<Note> notes = new ArrayList<Note>();
+
+            // Récupération des DAOs nécessaires pour les relations
+            MatiereDAO matiereDAO = new MatiereDAO(connect);
+
+            // Exploitation du résultat
+            while (resultSet.next()) {
+                Note n = new Note();
+                n.setMatricule(resultSet.getInt("matricule"));
+                n.setMatiere(matiereDAO.find(resultSet.getInt("id_matiere")));
+                n.setCoefficient(resultSet.getFloat("coefficient"));
+                n.setId_note(resultSet.getInt("id_note"));
+                n.setNote(resultSet.getFloat("note"));
+                notes.add(n);
+            }
+            return notes;
+        } catch(SQLException ex) {
+            System.err.println("Erreur SQL");
+        }
+        return null;
+    }
+
     public Note find(int id_eleve, int id_matiere) {
         try {
             // Préparation et exécution de la requête

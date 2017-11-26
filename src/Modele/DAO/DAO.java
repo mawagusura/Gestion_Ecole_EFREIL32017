@@ -1,6 +1,7 @@
 package Modele.DAO;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 public abstract class DAO<T> {
 
@@ -37,5 +38,11 @@ public abstract class DAO<T> {
      * @return T
      */
     public abstract T find(int id);
+
+    /**
+     * Méthode de recherche des informations
+     * @return T
+     */
+    public abstract ArrayList<T> findAll();
 
 }

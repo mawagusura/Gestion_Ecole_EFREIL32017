@@ -23,6 +23,10 @@ public class NoteService {
         return dao.find(e.getMatricule(), m.getId_matiere());
     }
 
+    public ArrayList<Note> getAllNotes() {
+        return dao.findAll();
+    }
+
     public ArrayList<Note> getNotes(Eleve e) {
         return dao.findByEleve(e.getMatricule());
     }

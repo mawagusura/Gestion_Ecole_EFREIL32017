@@ -51,6 +51,37 @@ public class MatiereDAO extends DAO<Matiere> {
         return null;
     }
 
+    @Override
+    public ArrayList<Matiere> findAll() {
+        try {
+
+            // Préparation et exécution de la requête
+            Statement stmnt;
+            stmnt = connect.createStatement();
+            ResultSet resultSet = stmnt.executeQuery(
+                    "SELECT * FROM Matiere"
+            );
+
+            // Array contenant les eleves
+            ArrayList<Matiere> matieres = new ArrayList<Matiere>();
+
+            // Exploitation du résultat
+            while (resultSet.next()) {
+                Matiere m = new Matiere();
+                m.setId_matiere(resultSet.getInt("id_matiere"));
+                m.setNom_matiere(resultSet.getString("nom_matiere"));
+                matieres.add(m);
+            }
+
+            return matieres;
+
+        } catch (SQLException ex) {
+            System.err.println("Erreur SQL.");
+        }
+
+        return null;
+    }
+
     public ArrayList<Matiere> findByEleve(int id_eleve) {
         try {
 
@@ -59,7 +90,7 @@ public class MatiereDAO extends DAO<Matiere> {
             stmnt = connect.createStatement();
             ResultSet resultSet = stmnt.executeQuery(
                     "SELECT * FROM Matiere WHERE id_matiere IN (" +
-                            "SELECT id_matiere FROM suit WHERE matricule = "+ id_eleve +")"
+                            "SELECT id_matiere FROM Note WHERE matricule = "+ id_eleve +")"
             );
 
             // Array contenant les eleves

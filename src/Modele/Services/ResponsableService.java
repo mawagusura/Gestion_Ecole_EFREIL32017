@@ -23,4 +23,5 @@ public class ResponsableService {
         return dao.findByEleve(e.getMatricule());
     }
 
+    public ArrayList<Responsable> getAllResponsables() { return dao.findAll(); }
 }

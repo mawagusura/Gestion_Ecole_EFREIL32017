@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class CoordonneesDAO extends DAO<Coordonnees> {
 
@@ -47,6 +48,37 @@ public class CoordonneesDAO extends DAO<Coordonnees> {
                 c.setVille(resultSet.getString("ville"));
                 return c;
             }
+        } catch(SQLException e) {
+            System.err.println("Erreur SQL");
+        }
+
+        // Si on trouve rien, on renvoie null
+        return null;
+    }
+
+    @Override
+    public ArrayList<Coordonnees> findAll() {
+        try {
+            // Préparation et exécution de la requête
+            Statement stmnt;
+            stmnt = connect.createStatement();
+            ResultSet resultSet = stmnt.executeQuery("SELECT * FROM Coordonnees");
+
+            // Arraylist des coordonnees
+            ArrayList<Coordonnees> coordonnees = new ArrayList<Coordonnees>();
+
+            // Exploitation du résultat
+            while (resultSet.next()) {
+                Coordonnees c = new Coordonnees();
+                c.setId_coord(resultSet.getInt("id_coord"));
+                c.setAdresse(resultSet.getString("adresse"));
+                c.setMail(resultSet.getString("mail"));
+                c.setTel_fixe(resultSet.getString("tel_fixe"));
+                c.setTel_mobile(resultSet.getString("tel_mobile"));
+                c.setVille(resultSet.getString("ville"));
+                coordonnees.add(c);
+            }
+            return coordonnees;
         } catch(SQLException e) {
             System.err.println("Erreur SQL");
         }

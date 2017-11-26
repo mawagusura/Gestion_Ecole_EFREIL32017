@@ -49,6 +49,37 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
         return null;
     }
 
+    @Override
+    public ArrayList<Utilisateur> findAll() {
+        try {
+            // Préparation et exécution de la requête
+            Statement stmnt;
+            stmnt = connect.createStatement();
+            ResultSet resultSet = stmnt.executeQuery("SELECT * FROM Utilisateur");
+
+            // ArrayList des utilisateurs
+            ArrayList<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
+
+            while (resultSet.next()) {
+                Utilisateur u = new Utilisateur();
+                u.setId_utilisateur(resultSet.getInt("id_utilisateur"));
+                u.setMail(resultSet.getString("mail"));
+                u.setNom(resultSet.getString("nom"));
+                u.setPrenom(resultSet.getString("prenom"));
+                u.setHash_mdp(resultSet.getString("hash_mdp"));
+
+                PrivilegeDAO p = new PrivilegeDAO(this.connect);
+                u.setPrivilege(p.find(resultSet.getInt("id_privilege")));
+                utilisateurs.add(u);
+            }
+            return utilisateurs;
+        } catch (SQLException e) {
+            System.err.println("Erreur SQL.");
+        }
+
+        return null;
+    }
+
     public Utilisateur find(String mail) {
         try {
 

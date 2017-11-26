@@ -19,6 +19,8 @@ public class EleveService {
         return dao.find(id);
     }
 
+    public ArrayList<Eleve> getAllEleves() { return dao.findAll(); }
+
     public ArrayList<Eleve> getEleves(Matiere m) {
         return dao.findByMatiere(m.getId_matiere());
     }

@@ -2,6 +2,7 @@ package Modele.Services;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
 import Modele.DAO.UtilisateurDAO;
 import Modele.DBConnector;
@@ -25,6 +26,10 @@ public class UtilisateurService {
 
     public boolean verifyPassword(Utilisateur user, String password) {
         return user.getHash_mdp().equals(hash_password(password));
+    }
+
+    public ArrayList<Utilisateur> getAllUtilisateurs() {
+        return dao.findAll();
     }
 
     private String hash_password(String password) {
