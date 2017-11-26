@@ -190,6 +190,7 @@ public class EleveDAO extends DAO<Eleve>{
 
         } catch (SQLException e) {
             e.printStackTrace();
+<<<<<<< HEAD
             System.err.println("Erreur SQL.");
         }
 
@@ -237,6 +238,8 @@ public class EleveDAO extends DAO<Eleve>{
 
         } catch (SQLException e) {
             e.printStackTrace();
+=======
+>>>>>>> 62b641445e232c2cd4927f7dbf86c597f472d4ca
             System.err.println("Erreur SQL.");
         }
 

@@ -3,7 +3,7 @@ package Modele.JavaBean;
 public class Note {
   private int id_note;
   private float coefficient;
-  private int matricule;
+  private Eleve eleve;
   private Matiere matiere;
   private float note;
 
@@ -23,12 +23,12 @@ public class Note {
     this.coefficient = coefficient;
   }
 
-  public int getMatricule() {
-    return matricule;
+  public Eleve getEleve() {
+    return eleve;
   }
 
-  public void setMatricule(int matricule) {
-    this.matricule = matricule;
+  public void setEleve(Eleve eleve) {
+    this.eleve = eleve;
   }
 
   public Matiere getMatiere() {

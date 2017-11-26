@@ -2,10 +2,7 @@ package Modele.DAO;
 
 import Modele.JavaBean.Niveau_classe;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class NiveauDAO extends DAO<Niveau_classe>{
@@ -25,7 +22,22 @@ public class NiveauDAO extends DAO<Niveau_classe>{
 
     @Override
     public boolean update(Niveau_classe obj) {
-        return false;
+        try {
+            // Préparation du statement
+            String query = "update Niveau_classe set " +
+                    "nom = ?," +
+                    "where id_niveau = " + obj.getId_niveau();
+
+            PreparedStatement preparedStmt = connect.prepareStatement(query);
+            preparedStmt.setString(1, obj.getNom());
+
+            // Exécution
+            preparedStmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

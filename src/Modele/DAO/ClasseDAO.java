@@ -23,7 +23,23 @@ public class ClasseDAO extends DAO<Classe> {
 
     @Override
     public boolean update(Classe obj) {
-        return false;
+        try {
+            // Préparation du statement
+            String query = "update Classe set " +
+                    "nom = ?," +
+                    "id_niveau = ?," +
+                    "where id_classe = " + obj.getId_classe();
+
+            PreparedStatement preparedStmt = connect.prepareStatement(query);
+            preparedStmt.setString(1, obj.getNom());
+            preparedStmt.setInt(2, obj.getNiveau().getId_niveau());
+            // Exécution
+            preparedStmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

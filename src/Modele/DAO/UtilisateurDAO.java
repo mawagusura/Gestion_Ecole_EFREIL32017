@@ -3,10 +3,7 @@ package Modele.DAO;
 import Modele.JavaBean.Privilege;
 import Modele.JavaBean.Utilisateur;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class UtilisateurDAO extends DAO<Utilisateur> {
@@ -27,7 +24,30 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
 
     @Override
     public boolean update(Utilisateur obj) {
-        return false;
+        try {
+            // Préparation du statement
+            String query = "update Utilisateur set " +
+                    "mail = ?," +
+                    "nom = ?," +
+                    "prenom = ?," +
+                    "hash_mdp = ?," +
+                    "id_privilege = ?," +
+                    "where id_utilisateur = " + obj.getId_utilisateur();
+
+            PreparedStatement preparedStmt = connect.prepareStatement(query);
+            preparedStmt.setString(1, obj.getMail());
+            preparedStmt.setString(2, obj.getNom());
+            preparedStmt.setString(3, obj.getPrenom());
+            preparedStmt.setString(4, obj.getHash_mdp());
+            preparedStmt.setInt(5, obj.getPrivilege().getId_privilege());
+
+            // Exécution
+            preparedStmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
