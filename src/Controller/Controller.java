@@ -1,11 +1,16 @@
 package Controller;
 
+import Modele.JavaBean.Classe;
+import Modele.JavaBean.Eleve;
+import Modele.JavaBean.Matiere;
 import Modele.JavaBean.Utilisateur;
 import Modele.Services.*;
 import View.LoginView;
 import View.MainFrame;
+import Modele.ViewModel.*;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class Controller {
 
@@ -60,6 +65,60 @@ public class Controller {
         else {
             loginView.throwPopup("Veuillez entrer un identifiant et un mot de passe pour pouvoir vous connecter.", "Erreur de connexion", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    /**
+     * Méthode qui gère l'event de fermeture de la fenetre.
+     * Demande une confirmation à l'utilisateur
+     */
+    public void handleClosing(MainFrame main) {
+        JOptionPane jop = new JOptionPane();
+        int option = jop.showConfirmDialog(null, "Etes vous sur de vouloir quitter ?", "Quitter ?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        if(option == JOptionPane.OK_OPTION){
+            main.dispose();
+        }
+    }
+
+    /**
+     * Méthode gérant le clic sur le bouton Modifier / consulter.
+     * Lance une nouvelle fenêtre si une ligne du tableau est sélectionnée.
+     */
+    public void handleClickUser(MainFrame main, int privilege){
+        if(main.getTableau().getSelectedRow()!= -1) {
+            String prenom = (String) main.getTableau().getModel().getValueAt(main.getTableau().getSelectedRow(),0);
+            String nom = (String) main.getTableau().getModel().getValueAt(main.getTableau().getSelectedRow(),1);
+
+
+            //SecondaryFrame sec = new SecondaryFrame();
+        }
+        else{
+            JOptionPane jop = new JOptionPane();
+            jop.showMessageDialog(main, "Veuillez sélectionner un élève dans la liste.","Sélectionnez un élève", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    /**
+     * Méthode qui gère le changement d'état des comboBox.
+     * Met à jour le tableau des éleves
+     */
+    public void handleComboChange(MainFrame main){
+        Classe currC =(Classe) main.getComboC().getSelectedItem();
+        Matiere currM = (Matiere) main.getComboM().getSelectedItem();
+
+        ArrayList<Eleve> eleves = this.eleveService.getEleves(currC,currM);
+
+        Object[][] data = new Object[eleves.size()][4];
+
+        for(int i=0;i<eleves.size();i++){
+            Eleve e = eleves.get(i);
+            data[i][0] = e.getPrenom();
+            data[i][1] = e.getNom();
+            data[i][2] = e.getSexe();
+            data[i][3] = e.getClasse();
+        }
+
+        main.getTableau().setModel(new AcaModel(data,main.getNoms()));
     }
 
 }
