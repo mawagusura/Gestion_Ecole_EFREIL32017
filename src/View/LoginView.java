@@ -13,15 +13,17 @@ public class LoginView extends JFrame{
     JTextField loginTF = new JTextField("michel.dumas@gmail.com");
     JTextField mdpTF = new JTextField("1234");
     JButton connectBT = new JButton("Connexion");
+    Controller controller;
 
-    public LoginView(){
+    public LoginView(Controller controller){
         this.setTitle("Gestion Ecole");
         this.setSize(400, 300);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.setContentPane(this.draw());
-        //this.connectBT.addActionListener(this);
+
+        this.controller = controller;
 
         this.mdpTF.setPreferredSize(new Dimension(150,30));
         this.loginTF.setPreferredSize(new Dimension(150,30));
@@ -43,9 +45,10 @@ public class LoginView extends JFrame{
     }
 
     private void test(){
-        Controller.connect(this,
+        this.controller.connect(this,
                 this.loginTF.getText(),
-                this.mdpTF.getText());    }
+                this.mdpTF.getText());
+    }
 
     private JPanel draw(){
 
@@ -78,9 +81,9 @@ public class LoginView extends JFrame{
         return container;
     }
 
-    public void throwPopup (String s){
+    public void throwPopup (String s, String t, int type ){
         JOptionPane jop = new JOptionPane();
-        jop.showMessageDialog(this, s, "Erreur de connexion", JOptionPane.ERROR_MESSAGE);
+        jop.showMessageDialog(this, s,t, type);
     }
 
 }

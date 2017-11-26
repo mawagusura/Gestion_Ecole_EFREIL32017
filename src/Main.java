@@ -1,11 +1,13 @@
+import Controller.Controller;
 import Modele.JavaBean.*;
 import Modele.JavaBean.MatiereService;
 import Modele.Services.*;
+import View.LoginView;
 
 public class Main {
 
     public static void main(String[] args){
-
+/*
         // Chargement des services
         EleveService eleveService = new EleveService();
         CoordonneesService coordinneesService = new CoordonneesService();
@@ -80,6 +82,9 @@ public class Main {
             nom_matiere = matiereService.getMatiere(note.getId_matiere()).getNom_matiere();
             System.out.println(" " + nom_matiere + " : " + note.getNote() + " coef. " + note.getCoefficient());
         }
+*/
+        Controller  controller = new Controller();
+        LoginView loginView = new LoginView(controller);
 
     }
 

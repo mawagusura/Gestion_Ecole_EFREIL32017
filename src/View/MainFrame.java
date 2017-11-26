@@ -1,5 +1,7 @@
 package View;
 
+import Controller.Controller;
+
 import javax.swing.*;
 
 import java.awt.event.WindowAdapter;
@@ -9,8 +11,9 @@ import java.awt.event.WindowListener;
 public class MainFrame extends JFrame {
 
     private JTabbedPane onglet = new JTabbedPane(JTabbedPane.LEFT);
+    private Controller controller;
 
-    public MainFrame(){
+    public MainFrame(Controller controller){
         this.setTitle("SchoolAdmin");
         //this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -21,6 +24,7 @@ public class MainFrame extends JFrame {
             }
         });
         this.setSize(1300, 600);
+        this.controller = controller;
 
         onglet.addTab("Gestion académique",new JPanel());
         onglet.addTab("Gestion administrative",new JPanel());
