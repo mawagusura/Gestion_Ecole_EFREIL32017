@@ -46,4 +46,8 @@ public class Note {
   public void setNote(float note) {
     this.note = note;
   }
+
+  public String toString(){
+    return Float.toString(this.note);
+  }
 }
