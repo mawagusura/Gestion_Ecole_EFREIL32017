@@ -76,6 +76,27 @@ public class MatiereDAO extends DAO<Matiere> {
         return null;
     }
 
+    public Matiere find(String nom) {
+        try {
+            // Préparation et exécution de la requête
+            Statement stmnt;
+            stmnt = connect.createStatement();
+            ResultSet resultSet = stmnt.executeQuery("SELECT * FROM Matiere WHERE nom_matiere = " + nom);
+
+            // Exploitation du résultat
+            while (resultSet.next()) {
+                Matiere m = new Matiere();
+                m.setId_matiere(resultSet.getInt("id_matiere"));
+                m.setNom_matiere(resultSet.getString("nom_matiere"));
+                return m;
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+            System.err.println("Erreur SQL");
+        }
+        return null;
+    }
+
     @Override
     public ArrayList<Matiere> findAll() {
         try {

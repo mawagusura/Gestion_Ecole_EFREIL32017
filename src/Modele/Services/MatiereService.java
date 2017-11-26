@@ -35,6 +35,10 @@ public class MatiereService {
         return dao.delete(m);
     }
 
+    public Matiere getMatiere(String nom) {
+        return dao.find(nom);
+    }
+
     public ArrayList<Matiere> getMatieres(Classe c) {
         if(c==null){
             return getAllMatieres();
