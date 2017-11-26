@@ -36,11 +36,14 @@ public class ClasseDAO extends DAO<Classe> {
             stmnt = connect.createStatement();
             ResultSet resultSet = stmnt.executeQuery("SELECT * FROM Classe WHERE id_classe = " + id);
 
+            // Récupération des DAOs nécessaires pour les relations
+            NiveauDAO niveauDAO = new NiveauDAO(connect);
+
             // Exploitation du résultat
             while (resultSet.next()) {
                 Classe c = new Classe();
                 c.setId_classe(resultSet.getInt("id_classe"));
-                c.setId_niveau(resultSet.getInt("id_niveau"));
+                c.setNiveau(niveauDAO.find(resultSet.getInt("id_niveau")));
                 c.setNom(resultSet.getString("nom"));
                 return c;
             }

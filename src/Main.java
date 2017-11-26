@@ -1,7 +1,4 @@
 import Controller.Controller;
-import Modele.JavaBean.*;
-import Modele.JavaBean.MatiereService;
-import Modele.Services.*;
 import View.LoginView;
 
 public class Main {

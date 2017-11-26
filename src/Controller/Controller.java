@@ -1,6 +1,5 @@
 package Controller;
 
-import Modele.JavaBean.MatiereService;
 import Modele.JavaBean.Utilisateur;
 import Modele.Services.*;
 import View.LoginView;
@@ -37,7 +36,7 @@ public class Controller {
         if(!id.isEmpty() || mdp.isEmpty()){
             Utilisateur temp = this.utilisateurService.getUtilisateur(id);
             if(temp != null && this.utilisateurService.verifyPassword(temp,mdp)){
-                loginView.throwPopup("Vous vous connectez en tant que "+this.privilegeService.getPrivilege(temp.getId_privilege()).getLibelle(),"Connexion",JOptionPane.INFORMATION_MESSAGE);
+                loginView.throwPopup("Vous vous connectez en tant que "+temp.getPrivilege().getLibelle(),"Connexion",JOptionPane.INFORMATION_MESSAGE);
                 loginView.dispose();
                 MainFrame appli = new MainFrame(this);
             }

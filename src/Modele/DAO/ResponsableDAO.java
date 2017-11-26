@@ -37,11 +37,14 @@ public class ResponsableDAO extends DAO<Responsable> {
             stmnt = connect.createStatement();
             ResultSet resultSet = stmnt.executeQuery("SELECT * FROM Responsable WHERE id_responsable = " + id_resp);
 
+            // Récupération des DAOs nécessaires pour les relations
+            EleveDAO eleveDAO = new EleveDAO(connect);
+
             // Exploitation du résultat
             while (resultSet.next()) {
                 Responsable r = new Responsable();
                 r.setId_responsable(resultSet.getInt("id_responsable"));
-                r.setId_eleve(resultSet.getInt("id_eleve"));
+                r.setEleve(eleveDAO.find(resultSet.getInt("id_eleve")));
                 r.setAdresse(resultSet.getString("adresse"));
                 r.setMail(resultSet.getString("mail"));
                 r.setTelephone(resultSet.getString("telephone"));
@@ -67,11 +70,14 @@ public class ResponsableDAO extends DAO<Responsable> {
             // Création d'une arraylist qui contiendra les responsables de l'élève
             ArrayList<Responsable> responsables= new ArrayList<Responsable>();
 
+            // Récupération des DAOs nécessaires pour les relations
+            EleveDAO eleveDAO = new EleveDAO(connect);
+
             // Exploitation du résultat
             while (resultSet.next()) {
                 Responsable r = new Responsable();
                 r.setId_responsable(resultSet.getInt("id_responsable"));
-                r.setId_eleve(resultSet.getInt("id_eleve"));
+                r.setEleve(eleveDAO.find(resultSet.getInt("id_eleve")));
                 r.setAdresse(resultSet.getString("adresse"));
                 r.setMail(resultSet.getString("mail"));
                 r.setTelephone(resultSet.getString("telephone"));

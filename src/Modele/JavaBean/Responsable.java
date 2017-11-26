@@ -7,7 +7,7 @@ public class Responsable {
   private String adresse;
   private String telephone;
   private String mail;
-  private int id_eleve;
+  private Eleve eleve;
 
   public int getId_responsable() {
     return id_responsable;
@@ -57,11 +57,11 @@ public class Responsable {
     this.mail = mail;
   }
 
-  public int getId_eleve() {
-    return id_eleve;
+  public Eleve getEleve() {
+    return eleve;
   }
 
-  public void setId_eleve(int id_eleve) {
-    this.id_eleve = id_eleve;
+  public void setEleve(Eleve eleve) {
+    this.eleve = eleve;
   }
 }

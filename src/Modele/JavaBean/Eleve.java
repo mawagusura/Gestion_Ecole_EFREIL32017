@@ -10,9 +10,34 @@ public class Eleve {
   private java.sql.Date date_naissance;
   private String nom;
   private String prenom;
-  private int id_coord;
-  private int id_sante;
-  private int id_classe;
+  private Coordonnees coord;
+  private Carnet_sante sante;
+
+  public Coordonnees getCoord() {
+    return coord;
+  }
+
+  public void setCoord(Coordonnees coord) {
+    this.coord = coord;
+  }
+
+  public Carnet_sante getSante() {
+    return sante;
+  }
+
+  public void setSante(Carnet_sante sante) {
+    this.sante = sante;
+  }
+
+  public Classe getClasse() {
+    return classe;
+  }
+
+  public void setClasse(Classe classe) {
+    this.classe = classe;
+  }
+
+  private Classe classe;
 
   public int getMatricule() {
     return matricule;
@@ -84,29 +109,5 @@ public class Eleve {
 
   public void setPrenom(String prenom) {
     this.prenom = prenom;
-  }
-
-  public int getId_coord() {
-    return id_coord;
-  }
-
-  public void setId_coord(int id_coord) {
-    this.id_coord = id_coord;
-  }
-
-  public int getId_sante() {
-    return id_sante;
-  }
-
-  public void setId_sante(int id_sante) {
-    this.id_sante = id_sante;
-  }
-
-  public int getId_classe() {
-    return id_classe;
-  }
-
-  public void setId_classe(int id_classe) {
-    this.id_classe = id_classe;
   }
 }

@@ -4,7 +4,7 @@ public class Note {
   private int id_note;
   private float coefficient;
   private int matricule;
-  private int id_matiere;
+  private Matiere matiere;
   private float note;
 
   public int getId_note() {
@@ -31,12 +31,12 @@ public class Note {
     this.matricule = matricule;
   }
 
-  public int getId_matiere() {
-    return id_matiere;
+  public Matiere getMatiere() {
+    return matiere;
   }
 
-  public void setId_matiere(int id_matiere) {
-    this.id_matiere = id_matiere;
+  public void setMatiere(Matiere matiere) {
+    this.matiere = matiere;
   }
 
   public float getNote() {

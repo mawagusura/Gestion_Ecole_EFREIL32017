@@ -3,7 +3,7 @@ package Modele.JavaBean;
 public class Classe {
   private int id_classe;
   private String nom;
-  private int id_niveau;
+  private Niveau_classe niveau;
 
   public int getId_classe() {
     return id_classe;
@@ -21,11 +21,11 @@ public class Classe {
     this.nom = nom;
   }
 
-  public int getId_niveau() {
-    return id_niveau;
+  public Niveau_classe getNiveau() {
+    return this.niveau;
   }
 
-  public void setId_niveau(int id_niveau) {
-    this.id_niveau = id_niveau;
+  public void setNiveau(Niveau_classe niveau) {
+    this.niveau = niveau;
   }
 }

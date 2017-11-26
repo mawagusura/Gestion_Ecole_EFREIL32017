@@ -6,7 +6,7 @@ public class Utilisateur {
   private String nom;
   private String prenom;
   private String hash_mdp;
-  private int id_privilege;
+  private Privilege privilege;
 
   public int getId_utilisateur() {
     return id_utilisateur;
@@ -48,11 +48,11 @@ public class Utilisateur {
     this.hash_mdp = hash_mdp;
   }
 
-  public int getId_privilege() {
-    return id_privilege;
+  public Privilege getPrivilege() {
+    return privilege;
   }
 
-  public void setId_privilege(int id_privilege) {
-    this.id_privilege = id_privilege;
+  public void setPrivilege(Privilege privilege) {
+    this.privilege = privilege;
   }
 }

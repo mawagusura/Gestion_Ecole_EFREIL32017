@@ -78,7 +78,7 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
                 u.setHash_mdp(resultSet.getString("hash_mdp"));
 
                 PrivilegeDAO p = new PrivilegeDAO(this.connect);
-                u.setId_privilege(resultSet.getInt("id_privilege"));
+                u.setPrivilege(p.find(resultSet.getInt("id_privilege")));
                 return u;
             }
         } catch (SQLException e) {

@@ -39,6 +39,11 @@ public class EleveDAO extends DAO<Eleve>{
             stmnt = connect.createStatement();
             ResultSet resultSet = stmnt.executeQuery("SELECT * FROM Eleve WHERE matricule = \"" + matricule + "\"");
 
+            // Récupération des DAOs nécessaires pour les relations
+            ClasseDAO classeDAO = new ClasseDAO(connect);
+            CoordonneesDAO coordonneesDAO = new CoordonneesDAO(connect);
+            CarnetSanteDAO carnetSanteDAO = new CarnetSanteDAO(connect);
+
             // Exploitation du résultat
             while (resultSet.next()) {
                 Eleve e = new Eleve();
@@ -46,9 +51,9 @@ public class EleveDAO extends DAO<Eleve>{
                 e.setDate_inscription(resultSet.getDate("date_inscription"));
                 e.setDate_naissance(resultSet.getDate("date_naissance"));
                 e.setEtablissement_precedent(resultSet.getString("etablissement_precedent"));
-                e.setId_classe(resultSet.getInt("id_classe"));
-                e.setId_coord(resultSet.getInt("id_coord"));
-                e.setId_sante(resultSet.getInt("id_sante"));
+                e.setClasse(classeDAO.find(resultSet.getInt("id_classe")));
+                e.setCoord(coordonneesDAO.find(resultSet.getInt("id_coord")));
+                e.setSante(carnetSanteDAO.find(resultSet.getInt("id_sante")));
                 e.setSexe(resultSet.getInt("sexe"));
                 e.setPrenom(resultSet.getString("prenom"));
                 e.setNom(resultSet.getString("nom"));
@@ -75,6 +80,11 @@ public class EleveDAO extends DAO<Eleve>{
                             "SELECT matricule FROM suit WHERE id_matiere = "+ id_matiere +")"
             );
 
+            // Récupération des DAOs nécessaires pour les relations
+            ClasseDAO classeDAO = new ClasseDAO(connect);
+            CoordonneesDAO coordonneesDAO = new CoordonneesDAO(connect);
+            CarnetSanteDAO carnetSanteDAO = new CarnetSanteDAO(connect);
+
             // Array contenant les eleves
             ArrayList<Eleve> eleves = new ArrayList<Eleve>();
 
@@ -85,9 +95,9 @@ public class EleveDAO extends DAO<Eleve>{
                 e.setDate_inscription(resultSet.getDate("date_inscription"));
                 e.setDate_naissance(resultSet.getDate("date_naissance"));
                 e.setEtablissement_precedent(resultSet.getString("etablissement_precedent"));
-                e.setId_classe(resultSet.getInt("id_classe"));
-                e.setId_coord(resultSet.getInt("id_coord"));
-                e.setId_sante(resultSet.getInt("id_sante"));
+                e.setClasse(classeDAO.find(resultSet.getInt("id_classe")));
+                e.setCoord(coordonneesDAO.find(resultSet.getInt("id_coord")));
+                e.setSante(carnetSanteDAO.find(resultSet.getInt("id_sante")));
                 e.setSexe(resultSet.getInt("sexe"));
                 e.setPrenom(resultSet.getString("prenom"));
                 e.setNom(resultSet.getString("nom"));
