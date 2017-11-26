@@ -31,6 +31,10 @@ public class MatiereService {
         return dao.update(m);
     }
 
+    public boolean persist_delete(Matiere m) {
+        return dao.delete(m);
+    }
+
     public ArrayList<Matiere> getMatieres(Classe c) {
         if(c==null){
             return getAllMatieres();

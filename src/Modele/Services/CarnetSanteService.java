@@ -19,4 +19,8 @@ public class CarnetSanteService {
         return dao.update(c);
     }
 
+    public boolean persist_delete(Carnet_sante c) {
+        return dao.delete(c);
+    }
+
 }

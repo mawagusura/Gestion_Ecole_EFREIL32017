@@ -18,7 +18,19 @@ public class ResponsableDAO extends DAO<Responsable> {
 
     @Override
     public boolean delete(Responsable obj) {
-        return false;
+        try {
+            // Préparation du statement
+            Statement stmnt = connect.createStatement();
+            String query = "DELETE FROM Responsable WHERE id_responsable = " + obj.getId_responsable();
+
+            // Exécution
+            stmnt.executeUpdate(query);
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

@@ -19,4 +19,8 @@ public class CoordonneesService {
     public boolean persist(Coordonnees c) {
         return dao.update(c);
     }
+
+    public boolean persist_delete(Coordonnees c) {
+        return dao.delete(c);
+    }
 }

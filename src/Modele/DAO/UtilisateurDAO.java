@@ -19,7 +19,19 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
 
     @Override
     public boolean delete(Utilisateur obj) {
-        return false;
+        try {
+            // Préparation du statement
+            Statement stmnt = connect.createStatement();
+            String query = "DELETE FROM Utilisateur WHERE id_utilisateur = " + obj.getId_utilisateur();
+
+            // Exécution
+            stmnt.executeUpdate(query);
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

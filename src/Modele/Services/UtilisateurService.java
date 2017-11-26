@@ -55,6 +55,10 @@ public class UtilisateurService {
         return sb.toString();
     }
 
+    public boolean persist_delete(Utilisateur u) {
+        return dao.delete(u);
+    }
+
     public boolean persist(Utilisateur u) {
         return dao.update(u);
     }

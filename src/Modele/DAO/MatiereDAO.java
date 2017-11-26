@@ -19,7 +19,19 @@ public class MatiereDAO extends DAO<Matiere> {
 
     @Override
     public boolean delete(Matiere obj) {
-        return false;
+        try {
+            // Préparation du statement
+            Statement stmnt = connect.createStatement();
+            String query = "DELETE FROM Matiere WHERE id_matiere = " + obj.getId_matiere();
+
+            // Exécution
+            stmnt.executeUpdate(query);
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

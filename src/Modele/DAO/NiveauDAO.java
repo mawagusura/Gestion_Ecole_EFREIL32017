@@ -17,7 +17,19 @@ public class NiveauDAO extends DAO<Niveau_classe>{
 
     @Override
     public boolean delete(Niveau_classe obj) {
-        return false;
+        try {
+            // Préparation du statement
+            Statement stmnt = connect.createStatement();
+            String query = "DELETE FROM Niveau_classe WHERE id_niveau = " + obj.getId_niveau();
+
+            // Exécution
+            stmnt.executeUpdate(query);
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

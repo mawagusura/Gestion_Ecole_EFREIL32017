@@ -30,6 +30,9 @@ public class NoteService {
     public boolean persist(Note n) {
         return dao.update(n);
     }
+    public boolean persist_delete(Note n) {
+        return dao.delete(n);
+    }
 
     public ArrayList<Note> getNotes(Eleve e) {
         return dao.findByEleve(e.getMatricule());

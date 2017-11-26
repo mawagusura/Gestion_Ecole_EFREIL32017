@@ -19,7 +19,19 @@ public class EleveDAO extends DAO<Eleve>{
 
     @Override
     public boolean delete(Eleve obj) {
-        return false;
+        try {
+            // Préparation du statement
+            Statement stmnt = connect.createStatement();
+            String query = "DELETE FROM Eleve WHERE matricule = " + obj.getMatricule();
+
+            // Exécution
+            stmnt.executeUpdate(query);
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

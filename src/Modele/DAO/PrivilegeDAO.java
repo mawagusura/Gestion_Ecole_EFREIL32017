@@ -17,7 +17,19 @@ public class PrivilegeDAO extends DAO<Privilege> {
 
     @Override
     public boolean delete(Privilege obj) {
-        return false;
+        try {
+            // Préparation du statement
+            Statement stmnt = connect.createStatement();
+            String query = "DELETE FROM privilege WHERE id_privilege = " + obj.getId_privilege();
+
+            // Exécution
+            stmnt.executeUpdate(query);
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

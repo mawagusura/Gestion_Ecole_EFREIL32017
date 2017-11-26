@@ -18,7 +18,19 @@ public class CarnetSanteDAO extends DAO<Carnet_sante> {
 
     @Override
     public boolean delete(Carnet_sante obj) {
-        return false;
+        try {
+            // Préparation du statement
+            Statement stmnt = connect.createStatement();
+            String query = "DELETE FROM Carnet_sante WHERE id_sante = " + obj.getId_sante();
+
+            // Exécution
+            stmnt.executeUpdate(query);
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

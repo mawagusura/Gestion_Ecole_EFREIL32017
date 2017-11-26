@@ -38,6 +38,10 @@ public class EleveService {
         return dao.find(nom, prenom);
     }
 
+    public boolean persist_delete(Eleve e) {
+        return dao.delete(e);
+    }
+
     public ArrayList<Eleve> getEleves(Classe c, Matiere m) {
         if(c == null && m==null){
             return dao.findAll();

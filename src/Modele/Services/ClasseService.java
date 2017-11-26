@@ -22,4 +22,8 @@ public class ClasseService {
     public boolean persist(Classe c) {
         return dao.update(c);
     }
+
+    public boolean persist_delete(Classe c) {
+        return dao.delete(c);
+    }
 }

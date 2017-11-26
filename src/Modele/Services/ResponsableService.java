@@ -28,4 +28,8 @@ public class ResponsableService {
     public boolean persist(Responsable r) {
         return dao.update(r);
     }
+
+    public boolean persist_delete(Responsable r) {
+        return dao.delete(r);
+    }
 }

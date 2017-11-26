@@ -18,7 +18,19 @@ public class ClasseDAO extends DAO<Classe> {
 
     @Override
     public boolean delete(Classe obj) {
-        return false;
+        try {
+            // Préparation du statement
+            Statement stmnt = connect.createStatement();
+            String query = "DELETE FROM Classe WHERE id_classe = " + obj.getId_classe();
+
+            // Exécution
+            stmnt.executeUpdate(query);
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

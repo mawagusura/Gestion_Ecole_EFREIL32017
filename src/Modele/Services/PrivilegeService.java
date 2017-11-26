@@ -25,4 +25,8 @@ public class PrivilegeService {
         return dao.update(p);
     }
 
+    public boolean persist_delete(Privilege p) {
+        return dao.delete(p);
+    }
+
 }

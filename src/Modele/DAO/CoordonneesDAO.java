@@ -18,7 +18,19 @@ public class CoordonneesDAO extends DAO<Coordonnees> {
 
     @Override
     public boolean delete(Coordonnees obj) {
-        return false;
+        try {
+            // Préparation du statement
+            Statement stmnt = connect.createStatement();
+            String query = "DELETE FROM Coordonnees WHERE id_coord = " + obj.getId_coord();
+
+            // Exécution
+            stmnt.executeUpdate(query);
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

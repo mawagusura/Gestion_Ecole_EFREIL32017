@@ -18,7 +18,19 @@ public class NoteDAO extends DAO<Note> {
 
     @Override
     public boolean delete(Note obj) {
-        return false;
+        try {
+            // Préparation du statement
+            Statement stmnt = connect.createStatement();
+            String query = "DELETE FROM Note WHERE id_note = " + obj.getId_note();
+
+            // Exécution
+            stmnt.executeUpdate(query);
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
