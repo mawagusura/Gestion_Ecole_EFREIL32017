@@ -21,4 +21,8 @@ public class PrivilegeService {
         return dao.findAll();
     }
 
+    public boolean persist(Privilege p) {
+        return dao.update(p);
+    }
+
 }

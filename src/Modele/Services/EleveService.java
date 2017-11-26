@@ -30,6 +30,9 @@ public class EleveService {
         return dao.findByClasse(c.getId_classe());
     }
 
+    public boolean persist(Eleve e) {
+        return dao.update(e);
+    }
 
     public ArrayList<Eleve> getEleves(Classe c, Matiere m) {
         if(c == null && m==null){

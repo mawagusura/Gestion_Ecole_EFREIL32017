@@ -27,6 +27,10 @@ public class NoteService {
         return dao.findAll();
     }
 
+    public boolean persist(Note n) {
+        return dao.update(n);
+    }
+
     public ArrayList<Note> getNotes(Eleve e) {
         return dao.findByEleve(e.getMatricule());
     }

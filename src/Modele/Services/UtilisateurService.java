@@ -54,4 +54,8 @@ public class UtilisateurService {
 
         return sb.toString();
     }
+
+    public boolean persist(Utilisateur u) {
+        return dao.update(u);
+    }
 }

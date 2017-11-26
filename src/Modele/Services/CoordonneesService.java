@@ -16,4 +16,7 @@ public class CoordonneesService {
         return dao.find(id);
     }
 
+    public boolean persist(Coordonnees c) {
+        return dao.update(c);
+    }
 }
