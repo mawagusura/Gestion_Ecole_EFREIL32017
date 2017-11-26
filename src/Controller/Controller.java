@@ -8,6 +8,7 @@ import Modele.Services.*;
 import View.LoginView;
 import View.MainFrame;
 import Modele.ViewModel.*;
+import View.SecondaryFrame;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -88,9 +89,9 @@ public class Controller {
         if(main.getTableau().getSelectedRow()!= -1) {
             String prenom = (String) main.getTableau().getModel().getValueAt(main.getTableau().getSelectedRow(),0);
             String nom = (String) main.getTableau().getModel().getValueAt(main.getTableau().getSelectedRow(),1);
+            Eleve e = this.eleveService.getEleve(nom,prenom);
 
-
-            //SecondaryFrame sec = new SecondaryFrame();
+            SecondaryFrame sec = new SecondaryFrame(privilege,e,this);
         }
         else{
             JOptionPane jop = new JOptionPane();
@@ -121,4 +122,61 @@ public class Controller {
         main.getTableau().setModel(new AcaModel(data,main.getNoms()));
     }
 
+    /**
+     * Méthode qui gère l'ajout d'une matière à un élève.
+     * @return
+     */
+    public void handleAjoutMatiere(SecondaryFrame s){
+        Object[] possibilities = {"ham", "spam", "yam"};
+        Matiere m = (Matiere) JOptionPane.showInputDialog(
+                s,
+                "Veuillez sélectionner une matière à ajouter à l'élève :\n",
+                "Nouvelle Matière",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                this.matiereService.getAllMatieres().toArray(),
+                this.matiereService.getAllMatieres().get(0)
+                );
+
+        //If a string was returned, say so.
+        if ((m != null)) {
+            System.out.println("Test");
+        }
+    }
+
+    public EleveService getEleveService() {
+        return eleveService;
+    }
+
+    public CoordonneesService getCoordonneesService() {
+        return coordonneesService;
+    }
+
+    public CarnetSanteService getCarnetSanteService() {
+        return carnetSanteService;
+    }
+
+    public ClasseService getClasseService() {
+        return classeService;
+    }
+
+    public ResponsableService getResponsableService() {
+        return responsableService;
+    }
+
+    public MatiereService getMatiereService() {
+        return matiereService;
+    }
+
+    public NoteService getNoteService() {
+        return noteService;
+    }
+
+    public UtilisateurService getUtilisateurService() {
+        return utilisateurService;
+    }
+
+    public PrivilegeService getPrivilegeService() {
+        return privilegeService;
+    }
 }

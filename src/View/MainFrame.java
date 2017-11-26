@@ -31,8 +31,8 @@ public class MainFrame extends JFrame {
     /**
      * Data Related attributes
      */
-    private Controller controller;
-    private Utilisateur utilisateur;
+    private final Controller controller;
+    private final Utilisateur utilisateur;
     private final String noms[] = {"Prénom","Nom","Sexe","Classe"};
 
 
@@ -96,17 +96,15 @@ public class MainFrame extends JFrame {
         this.comboM = new JComboBox();
 
         // Remplissage des comboBox
-        ClasseService servC = new ClasseService();
         comboC.addItem(null);
-        for( Classe c : servC.getAllClasses()){
+        for( Classe c : this.controller.getClasseService().getAllClasses()){
             comboC.addItem(c);
         }
         classe.add(comboC);
 
-        MatiereService servM = new MatiereService();
         Classe current = (Classe) comboC.getSelectedItem();
         comboM.addItem(null);
-        for(Matiere m : servM.getMatieres(current)){
+        for(Matiere m : this.controller.getMatiereService().getMatieres(current)){
             comboM.addItem(m);
         }
         matiere.add(comboM);
@@ -133,7 +131,7 @@ public class MainFrame extends JFrame {
         this.controller.handleComboChange(this);
         tableau.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane grille = new JScrollPane(tableau);
-        
+
         aca.setLayout(new BoxLayout(aca,BoxLayout.PAGE_AXIS));
         aca.add(bl);
         aca.add(boutons);
@@ -197,9 +195,6 @@ public class MainFrame extends JFrame {
         return utilisateur;
     }
 
-    public void setUtilisateur(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur;
-    }
 
     public String[] getNoms() {
         return noms;
