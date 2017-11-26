@@ -2,6 +2,7 @@ package Modele.Services;
 
 import Modele.DAO.MatiereDAO;
 import Modele.DBConnector;
+import Modele.JavaBean.Classe;
 import Modele.JavaBean.Eleve;
 import Modele.JavaBean.Matiere;
 
@@ -24,5 +25,9 @@ public class MatiereService {
 
     public ArrayList<Matiere> getAllMatieres() {
         return dao.findAll();
+    }
+
+    public ArrayList<Matiere> getMatieres(Classe c) {
+        return dao.findByClasse(c.getId_classe());
     }
 }
