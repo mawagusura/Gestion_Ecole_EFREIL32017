@@ -1,6 +1,10 @@
 import Controller.Controller;
 import View.LoginView;
 
+import Modele.Services.*;
+import Modele.JavaBean.*;
+
+
 public class Main {
 
     public static void main(String[] args){
@@ -34,7 +38,7 @@ public class Main {
         if (utilisateurService.verifyPassword(utilisateurService.getUtilisateur(mail), mdp)) {
             System.out.println("Mot de passe correct.");
             System.out.println("Privilège acquis : "
-                    + privilegeService.getPrivilege(u.getId_privilege()).getLibelle());
+                    + u.getPrivilege().getLibelle());
         } else {
             System.out.println("Mot de passe incorrect.");
         }
@@ -55,9 +59,9 @@ public class Main {
             System.out.println("\nElève n°15 :");
             System.out.println("Nom : "+ e.getNom());
             System.out.println("Prenom : "+ e.getPrenom());
-            System.out.println("Téléphone fixe : " + coordinneesService.getCoordonnees(e.getId_coord()).getTel_fixe());
-            System.out.println("Médecin traitant : "+ carnetSanteService.getCarnetSante(e.getId_sante()).getMedecin_traitement());
-            System.out.println("Classe : " + classeService.getClasse(e.getId_classe()).getNom());
+            System.out.println("Téléphone fixe : " + e.getCoord().getTel_fixe());
+            System.out.println("Médecin traitant : "+ e.getSante().getMedecin_traitement());
+            System.out.println("Classe : " + e.getClasse().getNom());
             System.out.println("Responsables : ");
             for (Responsable r:responsableService.getResponsables(e)) {
                 System.out.println(" - " + r.getPrenom() + " " + r.getNom().toUpperCase());
@@ -76,7 +80,7 @@ public class Main {
         // Récupération des notes
         String nom_matiere;
         for (Note note:noteService.getNotes(e)) {
-            nom_matiere = matiereService.getMatiere(note.getId_matiere()).getNom_matiere();
+            nom_matiere = note.getMatiere().getNom_matiere();
             System.out.println(" " + nom_matiere + " : " + note.getNote() + " coef. " + note.getCoefficient());
         }
 */
