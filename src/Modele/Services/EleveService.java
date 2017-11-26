@@ -34,6 +34,10 @@ public class EleveService {
         return dao.update(e);
     }
 
+    public Eleve getEleve(String nom, String prenom) {
+        return dao.find(nom, prenom);
+    }
+
     public ArrayList<Eleve> getEleves(Classe c, Matiere m) {
         if(c == null && m==null){
             return dao.findAll();
