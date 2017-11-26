@@ -15,13 +15,13 @@ public class NoteDAO extends DAO<Note> {
     public boolean create(Note obj) {
         try {
             // Préparation du statement
-            String query = "INSERT INTO Note (matricule, id_matiere, note) VALUES (?, ?, ?) ";
+            String query = "INSERT INTO Note (matricule, id_matiere, note, coefficient) VALUES (?, ?, ?, ?) ";
 
             PreparedStatement preparedStmt = connect.prepareStatement(query);
-            preparedStmt.setFloat(1, obj.getCoefficient());
-            preparedStmt.setInt(2, obj.getEleve().getMatricule());
-            preparedStmt.setInt(3, obj.getMatiere().getId_matiere());
-            preparedStmt.setFloat(4, obj.getNote());
+            preparedStmt.setInt(1, obj.getEleve().getMatricule());
+            preparedStmt.setInt(2, obj.getMatiere().getId_matiere());
+            preparedStmt.setFloat(3, obj.getNote());
+            preparedStmt.setFloat(4, obj.getCoefficient());
 
             // Exécution
             preparedStmt.executeUpdate();
@@ -57,7 +57,7 @@ public class NoteDAO extends DAO<Note> {
                     "coefficient = ?," +
                     "matricule = ?," +
                     "id_matiere = ?," +
-                    "note = ?," +
+                    "note = ?" +
                     "where id_note = " + obj.getId_note();
 
             PreparedStatement preparedStmt = connect.prepareStatement(query);
