@@ -49,6 +49,7 @@ public class CoordonneesDAO extends DAO<Coordonnees> {
                 return c;
             }
         } catch(SQLException e) {
+            e.printStackTrace();
             System.err.println("Erreur SQL");
         }
 
@@ -80,6 +81,7 @@ public class CoordonneesDAO extends DAO<Coordonnees> {
             }
             return coordonnees;
         } catch(SQLException e) {
+            e.printStackTrace();
             System.err.println("Erreur SQL");
         }
 

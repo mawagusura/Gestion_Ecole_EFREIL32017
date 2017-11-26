@@ -44,6 +44,7 @@ public class NiveauDAO extends DAO<Niveau_classe>{
                 return n;
             }
         } catch(SQLException e) {
+            e.printStackTrace();
             System.err.println("Erreur SQL");
         }
 
@@ -71,6 +72,7 @@ public class NiveauDAO extends DAO<Niveau_classe>{
             }
             return niveaux;
         } catch(SQLException e) {
+            e.printStackTrace();
             System.err.println("Erreur SQL");
         }
 

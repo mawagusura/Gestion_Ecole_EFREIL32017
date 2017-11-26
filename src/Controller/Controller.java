@@ -9,28 +9,41 @@ import javax.swing.*;
 
 public class Controller {
 
+    /**
+     * Services
+     */
     private final EleveService eleveService;
     private final CoordonneesService coordonneesService;
     private final CarnetSanteService carnetSanteService;
     private final ClasseService classeService;
     private final ResponsableService responsableService;
-    //private final MatiereService matiereService;
+    private final MatiereService matiereService;
     private final NoteService noteService;
     private final UtilisateurService utilisateurService;
     private final PrivilegeService privilegeService;
 
+    /**
+     * Constructeur
+     */
     public Controller(){
         this.eleveService = new EleveService();
         this.coordonneesService = new CoordonneesService();
         this.carnetSanteService = new CarnetSanteService();
         this.classeService = new ClasseService();
         this.responsableService = new ResponsableService();
-        //this.matiereService = new MatiereService();
+        this.matiereService = new MatiereService();
         this.noteService = new NoteService();
         this.utilisateurService = new UtilisateurService();
         this.privilegeService = new PrivilegeService();
     }
 
+    /**
+     * Méthode qui vérifie les informations de connexion entrées par l'utilisateur,
+     *  et qui lance l'application principale si ces dernièressont correctes.
+     * @param loginView
+     * @param id
+     * @param mdp
+     */
     public void connect(LoginView loginView, String id, String mdp){
 
         if(!id.isEmpty() && !mdp.isEmpty()){

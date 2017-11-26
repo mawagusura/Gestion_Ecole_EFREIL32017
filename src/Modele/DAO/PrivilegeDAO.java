@@ -45,6 +45,7 @@ public class PrivilegeDAO extends DAO<Privilege> {
                 return p;
             }
         } catch(SQLException e) {
+            e.printStackTrace();
             System.err.println("Erreur SQL");
         }
 
@@ -72,6 +73,7 @@ public class PrivilegeDAO extends DAO<Privilege> {
             }
             return privileges;
         } catch(SQLException e) {
+            e.printStackTrace();
             System.err.println("Erreur SQL");
         }
 

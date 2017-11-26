@@ -26,7 +26,21 @@ public class EleveService {
         return dao.findByMatiere(m.getId_matiere());
     }
 
+    public ArrayList<Eleve> getEleves(Classe c) {
+        return dao.findByClasse(c.getId_classe());
+    }
+
+
     public ArrayList<Eleve> getEleves(Classe c, Matiere m) {
+        if(c == null && m==null){
+            return dao.findAll();
+        }
+        else if(c==null && m!=null){
+            return this.getEleves(m);
+        }
+        else if(c!=null && m==null){
+            return this.getEleves(c);
+        }
         return dao.find(c.getId_classe(), m.getId_matiere());
     }
 }

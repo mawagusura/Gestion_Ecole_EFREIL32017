@@ -44,11 +44,12 @@ public class CarnetSanteDAO extends DAO<Carnet_sante> {
                 s.setMedecin_traitement(resultSet.getString("medecin_traitement"));
                 s.setRemarques(resultSet.getString("remarques"));
                 s.setTelephone_medecin(resultSet.getString("telephone_medecin"));
-                s.setVaccinations(resultSet.getInt("allergies"));
+                s.setVaccinations(resultSet.getInt("vaccinations"));
                 s.setAllergies(resultSet.getString("allergies"));
                 return s;
             }
         } catch(SQLException e) {
+            e.printStackTrace();
             System.err.println("Erreur SQL");
         }
 
@@ -80,6 +81,7 @@ public class CarnetSanteDAO extends DAO<Carnet_sante> {
             }
             return carnets;
         } catch(SQLException e) {
+            e.printStackTrace();
             System.err.println("Erreur SQL");
         }
 

@@ -43,6 +43,7 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
             return rs2utilisateur(resultSet);
 
         } catch (SQLException e) {
+            e.printStackTrace();
             System.err.println("Erreur SQL.");
         }
 
@@ -74,6 +75,7 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
             }
             return utilisateurs;
         } catch (SQLException e) {
+            e.printStackTrace();
             System.err.println("Erreur SQL.");
         }
 
@@ -92,6 +94,7 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
             return rs2utilisateur(resultSet);
 
         } catch (SQLException e) {
+            e.printStackTrace();
             System.err.println("Erreur SQL.");
         }
 
@@ -113,6 +116,7 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
                 return u;
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             System.err.println("Erreur SQL.");
         }
 
