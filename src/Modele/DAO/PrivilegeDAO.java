@@ -2,10 +2,7 @@ package Modele.DAO;
 
 import Modele.JavaBean.Privilege;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class PrivilegeDAO extends DAO<Privilege> {
@@ -25,7 +22,22 @@ public class PrivilegeDAO extends DAO<Privilege> {
 
     @Override
     public boolean update(Privilege obj) {
-        return false;
+        try {
+            // Préparation du statement
+            String query = "update privilege set " +
+                    "libelle = ?," +
+                    "where id_privilege = " + obj.getId_privilege();
+
+            PreparedStatement preparedStmt = connect.prepareStatement(query);
+            preparedStmt.setString(1, obj.getLibelle());
+
+            // Exécution
+            preparedStmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

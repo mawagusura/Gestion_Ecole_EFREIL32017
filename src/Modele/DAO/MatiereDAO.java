@@ -3,10 +3,7 @@ package Modele.DAO;
 import Modele.JavaBean.Eleve;
 import Modele.JavaBean.Matiere;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class MatiereDAO extends DAO<Matiere> {
@@ -27,7 +24,22 @@ public class MatiereDAO extends DAO<Matiere> {
 
     @Override
     public boolean update(Matiere obj) {
-        return false;
+        try {
+            // Préparation du statement
+            String query = "update Matiere set " +
+                    "nom_matiere = ?," +
+                    "where id_matiere = " + obj.getId_matiere();
+
+            PreparedStatement preparedStmt = connect.prepareStatement(query);
+            preparedStmt.setString(1, obj.getNom_matiere());
+
+            // Exécution
+            preparedStmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

@@ -2,10 +2,7 @@ package Modele.DAO;
 
 import Modele.JavaBean.Responsable;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class ResponsableDAO extends DAO<Responsable> {
@@ -26,7 +23,32 @@ public class ResponsableDAO extends DAO<Responsable> {
 
     @Override
     public boolean update(Responsable obj) {
-        return false;
+        try {
+            // Préparation du statement
+            String query = "update Responsable set " +
+                    "prenom = ?," +
+                    "nom = ?," +
+                    "adresse = ?," +
+                    "telephone = ?," +
+                    "mail = ?," +
+                    "id_eleve = ?," +
+                    "where id_responsable = " + obj.getId_responsable();
+
+            PreparedStatement preparedStmt = connect.prepareStatement(query);
+            preparedStmt.setString(1, obj.getPrenom());
+            preparedStmt.setString(2, obj.getNom());
+            preparedStmt.setString(3, obj.getAdresse());
+            preparedStmt.setString(4, obj.getTelephone());
+            preparedStmt.setString(5, obj.getMail());
+            preparedStmt.setInt(6, obj.getEleve().getMatricule());
+
+            // Exécution
+            preparedStmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

@@ -2,10 +2,7 @@ package Modele.DAO;
 
 import Modele.JavaBean.Note;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class NoteDAO extends DAO<Note> {
@@ -26,7 +23,28 @@ public class NoteDAO extends DAO<Note> {
 
     @Override
     public boolean update(Note obj) {
-        return false;
+        try {
+            // Préparation du statement
+            String query = "update Note set " +
+                    "coefficient = ?," +
+                    "matricule = ?," +
+                    "id_matiere = ?," +
+                    "note = ?," +
+                    "where id_note = " + obj.getId_note();
+
+            PreparedStatement preparedStmt = connect.prepareStatement(query);
+            preparedStmt.setFloat(1, obj.getCoefficient());
+            preparedStmt.setInt(2, obj.getEleve().getMatricule());
+            preparedStmt.setInt(3, obj.getMatiere().getId_matiere());
+            preparedStmt.setFloat(4, obj.getNote());
+
+            // Exécution
+            preparedStmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
@@ -39,11 +57,12 @@ public class NoteDAO extends DAO<Note> {
 
             // Récupération des DAOs nécessaires pour les relations
             MatiereDAO matiereDAO = new MatiereDAO(connect);
+            EleveDAO eleveDAO = new EleveDAO(connect);
 
             // Exploitation du résultat
             while (resultSet.next()) {
                 Note n = new Note();
-                n.setMatricule(resultSet.getInt("matricule"));
+                n.setEleve(eleveDAO.find(resultSet.getInt("matricule")));
                 n.setMatiere(matiereDAO.find(resultSet.getInt("id_matiere")));
                 n.setCoefficient(resultSet.getFloat("coefficient"));
                 n.setId_note(resultSet.getInt("id_note"));
@@ -69,11 +88,12 @@ public class NoteDAO extends DAO<Note> {
 
             // Récupération des DAOs nécessaires pour les relations
             MatiereDAO matiereDAO = new MatiereDAO(connect);
+            EleveDAO eleveDAO = new EleveDAO(connect);
 
             // Exploitation du résultat
             while (resultSet.next()) {
                 Note n = new Note();
-                n.setMatricule(resultSet.getInt("matricule"));
+                n.setEleve(eleveDAO.find(resultSet.getInt("matricule")));
                 n.setMatiere(matiereDAO.find(resultSet.getInt("id_matiere")));
                 n.setCoefficient(resultSet.getFloat("coefficient"));
                 n.setId_note(resultSet.getInt("id_note"));
@@ -97,11 +117,12 @@ public class NoteDAO extends DAO<Note> {
 
             // Récupération des DAOs nécessaires pour les relations
             MatiereDAO matiereDAO = new MatiereDAO(connect);
+            EleveDAO eleveDAO = new EleveDAO(connect);
 
             // Exploitation du résultat
             while (resultSet.next()) {
                 Note n = new Note();
-                n.setMatricule(resultSet.getInt("matricule"));
+                n.setEleve(eleveDAO.find(resultSet.getInt("matricule")));
                 n.setMatiere(matiereDAO.find(resultSet.getInt("id_matiere")));
                 n.setCoefficient(resultSet.getFloat("coefficient"));
                 n.setId_note(resultSet.getInt("id_note"));
@@ -126,11 +147,12 @@ public class NoteDAO extends DAO<Note> {
 
             // Récupération des DAOs nécessaires pour les relations
             MatiereDAO matiereDAO = new MatiereDAO(connect);
+            EleveDAO eleveDAO = new EleveDAO(connect);
 
             // Exploitation du résultat
             while (resultSet.next()) {
                 Note n = new Note();
-                n.setMatricule(resultSet.getInt("matricule"));
+                n.setEleve(eleveDAO.find(resultSet.getInt("matricule")));
                 n.setMatiere(matiereDAO.find(resultSet.getInt("id_matiere")));
                 n.setCoefficient(resultSet.getFloat("coefficient"));
                 n.setId_note(resultSet.getInt("id_note"));

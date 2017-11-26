@@ -2,10 +2,7 @@ package Modele.DAO;
 
 import Modele.JavaBean.Carnet_sante;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class CarnetSanteDAO extends DAO<Carnet_sante> {
@@ -26,7 +23,31 @@ public class CarnetSanteDAO extends DAO<Carnet_sante> {
 
     @Override
     public boolean update(Carnet_sante obj) {
-        return false;
+        try {
+            // Préparation du statement
+            String query = "update Carnet_sante set " +
+                    "medecin_traitement = ?," +
+                    "telephone_medecin = ?," +
+                    "vaccinations = ?," +
+                    "allergies = ?," +
+                    "remarques = ? " +
+                    "where id_sante = " + obj.getId_sante();
+
+            PreparedStatement preparedStmt = connect.prepareStatement(query);
+            preparedStmt.setString(1, obj.getMedecin_traitement());
+            preparedStmt.setString(2, obj.getTelephone_medecin());
+            preparedStmt.setInt(3, obj.getVaccinations());
+            preparedStmt.setString(4, obj.getAllergies());
+            preparedStmt.setString(5, obj.getRemarques());
+
+            // Exécution
+            preparedStmt.executeUpdate();
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

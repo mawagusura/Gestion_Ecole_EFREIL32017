@@ -2,10 +2,7 @@ package Modele.DAO;
 
 import Modele.JavaBean.Coordonnees;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class CoordonneesDAO extends DAO<Coordonnees> {
@@ -26,7 +23,29 @@ public class CoordonneesDAO extends DAO<Coordonnees> {
 
     @Override
     public boolean update(Coordonnees obj) {
-        return false;
+        try {
+            // Préparation du statement
+            String query = "update Coordonnees set " +
+                    "adresse = ?," +
+                    "ville = ?," +
+                    "tel_fixe = ?," +
+                    "tel_mobile = ?," +
+                    "mail = ?," +
+                    "where id_coord = " + obj.getId_coord();
+
+            PreparedStatement preparedStmt = connect.prepareStatement(query);
+            preparedStmt.setString(1, obj.getAdresse());
+            preparedStmt.setString(2, obj.getVille());
+            preparedStmt.setString(3, obj.getTel_fixe());
+            preparedStmt.setString(4, obj.getTel_mobile());
+            preparedStmt.setString(5, obj.getMail());
+            // Exécution
+            preparedStmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
