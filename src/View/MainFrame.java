@@ -8,7 +8,6 @@ import Modele.JavaBean.Utilisateur;
 import Modele.Services.ClasseService;
 import Modele.Services.EleveService;
 import Modele.Services.MatiereService;
-import Modele.Services.UtilisateurService;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -68,15 +67,28 @@ public class MainFrame extends JFrame {
         Box boutons = Box.createHorizontalBox();
         JPanel classe = new JPanel();
         JPanel matiere = new JPanel();
-        JButton modify = new JButton("Modifier / Consulter");
 
-        // event listener bouton modifier
-        modify.addActionListener(new AbstractAction() {
-             @Override
-             public void actionPerformed(ActionEvent e) {
-                 handleClick();
-             }
-        });
+
+        // event listener bouton modifier / consulter
+        JButton modify;
+        if(this.utilisateur.getPrivilege().getId_privilege()==1){
+            modify = new JButton("Modifier / Consulter l'élève");
+            modify.addActionListener(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    handleClickAdmin();
+                }
+            });
+        }
+        else{
+            modify = new JButton("Consulter l'élève");
+            modify.addActionListener(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    handleClickUser();
+                }
+            });
+        }
 
 
         // On déclare et initialise deux comboBox
@@ -159,9 +171,21 @@ public class MainFrame extends JFrame {
      * Méthode gérant le clic sur le bouton Modifier / consulter.
      * Lance une nouvelle fenêtre si une ligne du tableau est sélectionnée.
      */
-    private void handleClick(){
+    private void handleClickAdmin(){
         if(this.tableau.getSelectedRow()!= -1) {
-            System.out.println("Selected");
+
+        }
+        else{
+
+            JOptionPane jop = new JOptionPane();
+            jop.showMessageDialog(this, "Veuillez sélectionner un élève dans la liste.","Sélectionnez un élève", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void handleClickUser(){
+        if(this.tableau.getSelectedRow()!= -1) {
+            JFrame frame = new JFrame("Test");
+            frame.setVisible(true);
         }
     }
 
