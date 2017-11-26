@@ -28,4 +28,8 @@ public class Classe {
   public void setNiveau(Niveau_classe niveau) {
     this.niveau = niveau;
   }
+
+  public String toString(){
+    return this.nom;
+  }
 }
