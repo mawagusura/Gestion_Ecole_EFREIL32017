@@ -27,6 +27,9 @@ public class NoteService {
         return dao.findAll();
     }
 
+    public boolean persist_new(Note n) {
+        return dao.create(n);
+    }
     public boolean persist(Note n) {
         return dao.update(n);
     }

@@ -13,7 +13,23 @@ public class NoteDAO extends DAO<Note> {
 
     @Override
     public boolean create(Note obj) {
-        return false;
+        try {
+            // Préparation du statement
+            String query = "INSERT INTO Note (matricule, id_matiere, note) VALUES (?, ?, ?) ";
+
+            PreparedStatement preparedStmt = connect.prepareStatement(query);
+            preparedStmt.setFloat(1, obj.getCoefficient());
+            preparedStmt.setInt(2, obj.getEleve().getMatricule());
+            preparedStmt.setInt(3, obj.getMatiere().getId_matiere());
+            preparedStmt.setFloat(4, obj.getNote());
+
+            // Exécution
+            preparedStmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
