@@ -70,6 +70,7 @@ public class NoteDAO extends DAO<Note> {
                 return n;
             }
         } catch(SQLException ex) {
+            ex.printStackTrace();
             System.err.println("Erreur SQL");
         }
         return null;
@@ -102,6 +103,7 @@ public class NoteDAO extends DAO<Note> {
             }
             return notes;
         } catch(SQLException ex) {
+            ex.printStackTrace();
             System.err.println("Erreur SQL");
         }
         return null;
@@ -130,6 +132,7 @@ public class NoteDAO extends DAO<Note> {
                 return n;
             }
         } catch(SQLException ex) {
+            ex.printStackTrace();
             System.err.println("Erreur SQL");
         }
         return null;
@@ -161,6 +164,7 @@ public class NoteDAO extends DAO<Note> {
             }
             return notes;
         } catch(SQLException ex) {
+            ex.printStackTrace();
             System.err.println("Erreur SQL");
         }
         return null;

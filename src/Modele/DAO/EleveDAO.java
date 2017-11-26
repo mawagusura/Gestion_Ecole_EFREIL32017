@@ -95,6 +95,7 @@ public class EleveDAO extends DAO<Eleve>{
             }
 
         } catch (SQLException e) {
+            e.printStackTrace();
             System.err.println("Erreur SQL.");
         }
 
@@ -141,6 +142,7 @@ public class EleveDAO extends DAO<Eleve>{
             return eleves;
 
         } catch (SQLException e) {
+            e.printStackTrace();
             System.err.println("Erreur SQL.");
         }
 
@@ -187,6 +189,7 @@ public class EleveDAO extends DAO<Eleve>{
             return eleves;
 
         } catch (SQLException e) {
+            e.printStackTrace();
             System.err.println("Erreur SQL.");
         }
 
@@ -233,6 +236,7 @@ public class EleveDAO extends DAO<Eleve>{
             return eleves;
 
         } catch (SQLException e) {
+            e.printStackTrace();
             System.err.println("Erreur SQL.");
         }
 

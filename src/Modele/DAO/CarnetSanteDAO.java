@@ -70,6 +70,7 @@ public class CarnetSanteDAO extends DAO<Carnet_sante> {
                 return s;
             }
         } catch(SQLException e) {
+            e.printStackTrace();
             System.err.println("Erreur SQL");
         }
 
@@ -101,6 +102,7 @@ public class CarnetSanteDAO extends DAO<Carnet_sante> {
             }
             return carnets;
         } catch(SQLException e) {
+            e.printStackTrace();
             System.err.println("Erreur SQL");
         }
 

@@ -62,6 +62,7 @@ public class ClasseDAO extends DAO<Classe> {
                 return c;
             }
         } catch(SQLException e) {
+            e.printStackTrace();
             System.err.println("Erreur SQL");
         }
 
@@ -93,6 +94,7 @@ public class ClasseDAO extends DAO<Classe> {
             }
             return classes;
         } catch(SQLException e) {
+            e.printStackTrace();
             System.err.println("Erreur SQL");
         }
 

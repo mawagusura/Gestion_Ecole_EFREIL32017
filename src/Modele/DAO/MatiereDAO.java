@@ -58,6 +58,7 @@ public class MatiereDAO extends DAO<Matiere> {
                 return m;
             }
         } catch(SQLException e) {
+            e.printStackTrace();
             System.err.println("Erreur SQL");
         }
         return null;
@@ -88,6 +89,7 @@ public class MatiereDAO extends DAO<Matiere> {
             return matieres;
 
         } catch (SQLException ex) {
+            ex.printStackTrace();
             System.err.println("Erreur SQL.");
         }
 
@@ -119,6 +121,7 @@ public class MatiereDAO extends DAO<Matiere> {
             return matieres;
 
         } catch (SQLException ex) {
+            ex.printStackTrace();
             System.err.println("Erreur SQL.");
         }
 
@@ -153,6 +156,7 @@ public class MatiereDAO extends DAO<Matiere> {
             return matieres;
 
         } catch (SQLException ex) {
+            ex.printStackTrace();
             System.err.println("Erreur SQL.");
         }
 

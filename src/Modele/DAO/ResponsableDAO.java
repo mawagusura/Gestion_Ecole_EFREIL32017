@@ -75,6 +75,7 @@ public class ResponsableDAO extends DAO<Responsable> {
                 return r;
             }
         } catch(SQLException e) {
+            e.printStackTrace();
             System.err.println("Erreur SQL");
         }
 
@@ -111,6 +112,7 @@ public class ResponsableDAO extends DAO<Responsable> {
 
             return responsables;
         } catch(SQLException e) {
+            e.printStackTrace();
             System.err.println("Erreur SQL");
         }
 
@@ -146,6 +148,7 @@ public class ResponsableDAO extends DAO<Responsable> {
 
             return responsables;
         } catch(SQLException e) {
+            e.printStackTrace();
             System.err.println("Erreur SQL");
         }
 
