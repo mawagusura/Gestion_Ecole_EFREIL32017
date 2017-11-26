@@ -87,6 +87,7 @@ public class MainFrame extends JFrame {
 
         // Remplissage des comboBox
         ClasseService servC = new ClasseService();
+        comboC.addItem(null);
         for( Classe c : servC.getAllClasses()){
             comboC.addItem(c);
         }
@@ -94,6 +95,7 @@ public class MainFrame extends JFrame {
 
         MatiereService servM = new MatiereService();
         Classe current = (Classe) comboC.getSelectedItem();
+        comboM.addItem(null);
         for(Matiere m : servM.getMatieres(current)){
             comboM.addItem(m);
         }
@@ -117,6 +119,7 @@ public class MainFrame extends JFrame {
 
         // Génération Grille
 
+        this.tableau = new JTable();
         handleComboChange();
         tableau.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane grille = new JScrollPane(tableau);
@@ -183,8 +186,8 @@ public class MainFrame extends JFrame {
             data[i][3] = e.getClasse();
         }
 
-        AcaModel model = new AcaModel(data,this.noms);
-        this.tableau = new JTable(model);
+        this.tableau.setModel(new AcaModel(data,noms));
+
 
 
     }
@@ -200,6 +203,10 @@ public class MainFrame extends JFrame {
         public AcaModel(Object[][] data, String[] title){
             this.data = data;
             this.title = title;
+        }
+
+        public void setData(Object[][] _data){
+            this.data = _data;
         }
 
         //Retourne le nombre de colonnes

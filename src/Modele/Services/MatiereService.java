@@ -28,6 +28,9 @@ public class MatiereService {
     }
 
     public ArrayList<Matiere> getMatieres(Classe c) {
+        if(c==null){
+            return getAllMatieres();
+        }
         return dao.findByClasse(c.getId_classe());
     }
 }
