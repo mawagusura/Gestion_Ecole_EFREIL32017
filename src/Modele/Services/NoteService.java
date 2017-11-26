@@ -34,6 +34,17 @@ public class NoteService {
         return dao.delete(n);
     }
 
+    public float getMoyenne(Eleve e) {
+        NoteService noteService = new NoteService();
+        ArrayList<Note> notes = noteService.getNotes(e);
+        float addition=0, diviseur = 0;
+        for (Note n: notes) {
+            addition += n.getNote()*n.getCoefficient();
+            diviseur += n.getCoefficient();
+        }
+        return addition / diviseur;
+    }
+
     public ArrayList<Note> getNotes(Eleve e) {
         return dao.findByEleve(e.getMatricule());
     }
