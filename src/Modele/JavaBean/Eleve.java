@@ -110,4 +110,8 @@ public class Eleve {
   public void setPrenom(String prenom) {
     this.prenom = prenom;
   }
+
+  public String toString() {
+    return this.prenom + " " + this.nom.toUpperCase();
+  }
 }

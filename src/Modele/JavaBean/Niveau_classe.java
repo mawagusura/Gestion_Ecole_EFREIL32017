@@ -19,4 +19,8 @@ public class Niveau_classe {
   public void setNom(String nom) {
     this.nom = nom;
   }
+
+  public String toString() {
+    return this.nom;
+  }
 }

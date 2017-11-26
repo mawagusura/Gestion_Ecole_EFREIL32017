@@ -64,4 +64,8 @@ public class Responsable {
   public void setEleve(Eleve eleve) {
     this.eleve = eleve;
   }
+
+  public String toString() {
+    return this.prenom + " " + this.nom.toUpperCase();
+  }
 }

@@ -55,4 +55,8 @@ public class Utilisateur {
   public void setPrivilege(Privilege privilege) {
     this.privilege = privilege;
   }
+
+  public String toString() {
+      return this.prenom + " " + this.nom.toUpperCase();
+  }
 }

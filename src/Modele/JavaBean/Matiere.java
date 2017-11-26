@@ -19,4 +19,8 @@ public class Matiere {
   public void setNom_matiere(String nom_matiere) {
     this.nom_matiere = nom_matiere;
   }
+
+  public String toString() {
+    return this.nom_matiere;
+  }
 }
