@@ -8,6 +8,7 @@ import javax.swing.table.AbstractTableModel;
 public class AcaModel extends AbstractTableModel {
     private Object[][] data;
     private String[] title;
+    private boolean edit = false;
 
     //Constructeur
     public AcaModel(Object[][] data, String[] title){
@@ -15,8 +16,27 @@ public class AcaModel extends AbstractTableModel {
         this.title = title;
     }
 
+    public AcaModel(Object[][] data, String[] title, boolean edit){
+        this(data, title);
+        this.edit = edit;
+    }
+
+
     public void setData(Object[][] _data){
         this.data = _data;
+    }
+
+    @Override
+    public boolean isCellEditable(int row, int col){
+        if(edit && col>0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void setValueAt(Object value, int row, int col) {
+        data[row][col] = value;
     }
 
     //Retourne le nombre de colonnes

@@ -58,7 +58,7 @@ public class MainFrame extends JFrame {
         JPanel bl = new JPanel();
         bl.setLayout(new BorderLayout());
         JLabel titre = new JLabel("Liste des élèves");
-        JLabel util = new JLabel(this.utilisateur.getNom()+" "+this.utilisateur.getPrenom());
+        JLabel util = new JLabel("Connecté en tant que : "+this.utilisateur.getNom()+" "+this.utilisateur.getPrenom());
 
         bl.add(titre,BorderLayout.WEST);
         bl.add(util,BorderLayout.EAST);
@@ -199,8 +199,4 @@ public class MainFrame extends JFrame {
     public String[] getNoms() {
         return noms;
     }
-
-
-
-
 }

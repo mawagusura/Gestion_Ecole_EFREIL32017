@@ -81,7 +81,7 @@ public class MatiereDAO extends DAO<Matiere> {
             // Préparation et exécution de la requête
             Statement stmnt;
             stmnt = connect.createStatement();
-            ResultSet resultSet = stmnt.executeQuery("SELECT * FROM Matiere WHERE nom_matiere = " + nom);
+            ResultSet resultSet = stmnt.executeQuery("SELECT * FROM Matiere WHERE nom_matiere LIKE " + nom);
 
             // Exploitation du résultat
             while (resultSet.next()) {

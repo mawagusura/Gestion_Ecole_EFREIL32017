@@ -33,17 +33,7 @@ public class SecondaryFrame extends JFrame {
 
         // Tableau
         this.tableau = new JTable();
-        ArrayList<Matiere> matieres = this.controller.getMatiereService().getMatieres(this.eleve);
-        Object[][] data = new Object[matieres.size()][3];
-
-        for(int i=0;i<matieres.size();i++){
-            Matiere e = matieres.get(i);
-            data[i][0] = e.getNom_matiere();
-            data[i][1] = this.controller.getNoteService().getNote(this.eleve,e);
-            data[i][2] = this.controller.getNoteService().getNote(this.eleve,e).getCoefficient();
-        }
-
-        this.tableau.setModel(new AcaModel(data,this.noms));
+        drawTableau();
 
         this.tableau.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane grille = new JScrollPane(tableau);
@@ -72,6 +62,12 @@ public class SecondaryFrame extends JFrame {
             });
             b1.add(p2);
             JButton valider = new JButton("Valider les modifications");
+            valider.addActionListener(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    handleValidation();
+                }
+            });
             b1.add(new JLabel("Moyenne générale : "+this.controller.getNoteService().getMoyenne(this.eleve)));
             b1.add(valider);
         }
@@ -88,12 +84,48 @@ public class SecondaryFrame extends JFrame {
 
         this.setTitle(eleve.getNom()+ " " + eleve.getPrenom());
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setSize(00,250);
+        this.setSize(500,250);
         this.setVisible(true);
     }
 
-    public void handleAjoutMatiere(){
+    public void drawTableau(){
+        ArrayList<Matiere> matieres = this.controller.getMatiereService().getMatieres(this.eleve);
+        Object[][] data = new Object[matieres.size()][3];
+
+        for(int i=0;i<matieres.size();i++){
+            Matiere e = matieres.get(i);
+            data[i][0] = e.getNom_matiere();
+            data[i][1] = this.controller.getNoteService().getNote(this.eleve,e);
+            data[i][2] = this.controller.getNoteService().getNote(this.eleve,e).getCoefficient();
+        }
+
+        this.tableau.setModel(new AcaModel(data,this.noms, true));
+    }
+
+    private void handleAjoutMatiere(){
         this.controller.handleAjoutMatiere(this);
     }
 
+    private void handleValidation(){
+        this.controller.handleValidation(this);
+    }
+
+    /**
+     * getters and setters
+     */
+    public Eleve getEleve() {
+        return eleve;
+    }
+
+    public int getPrivilege() {
+        return privilege;
+    }
+
+    public JTable getTableau() {
+        return tableau;
+    }
+
+    public String[] getNoms() {
+        return noms;
+    }
 }

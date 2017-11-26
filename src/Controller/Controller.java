@@ -1,9 +1,6 @@
 package Controller;
 
-import Modele.JavaBean.Classe;
-import Modele.JavaBean.Eleve;
-import Modele.JavaBean.Matiere;
-import Modele.JavaBean.Utilisateur;
+import Modele.JavaBean.*;
 import Modele.Services.*;
 import View.LoginView;
 import View.MainFrame;
@@ -12,6 +9,8 @@ import View.SecondaryFrame;
 
 import javax.swing.*;
 import java.util.ArrayList;
+
+import static java.lang.System.exit;
 
 public class Controller {
 
@@ -79,6 +78,7 @@ public class Controller {
         if(option == JOptionPane.OK_OPTION){
             main.dispose();
         }
+        exit(0);
     }
 
     /**
@@ -115,7 +115,7 @@ public class Controller {
             Eleve e = eleves.get(i);
             data[i][0] = e.getPrenom();
             data[i][1] = e.getNom();
-            data[i][2] = e.getSexe();
+            data[i][2] = e.getSexe() == 1 ? "Homme" : "Femme";
             data[i][3] = e.getClasse();
         }
 
@@ -140,9 +140,33 @@ public class Controller {
 
         //If a string was returned, say so.
         if ((m != null)) {
-            System.out.println("Test");
+            Note n = new Note();
+            n.setEleve(s.getEleve());
+            n.setMatiere(m);
+            this.noteService.persist(n);
+            s.drawTableau();
         }
     }
+
+    /**
+     * Gère la modification des données d'un élève
+     * @return
+     */
+    public void handleValidation(SecondaryFrame s) {
+
+
+        //loop tableau
+        for(int i=1;i<this.matiereService.getMatieres(s.getEleve()).size();i++){
+            Note temp = this.noteService.getNote(
+                    s.getEleve(),
+                    this.matiereService.getMatiere((String) s.getTableau().getModel().getValueAt(i,0)));
+            temp.setNote(Float.parseFloat((String) s.getTableau().getModel().getValueAt(i,1)));
+            temp.setCoefficient(Float.parseFloat((String) s.getTableau().getModel().getValueAt(i,2)));
+            this.noteService.persist(temp);
+        }
+    }
+
+
 
     public EleveService getEleveService() {
         return eleveService;
