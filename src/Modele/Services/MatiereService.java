@@ -27,6 +27,10 @@ public class MatiereService {
         return dao.findAll();
     }
 
+    public boolean persist(Matiere m) {
+        return dao.update(m);
+    }
+
     public ArrayList<Matiere> getMatieres(Classe c) {
         if(c==null){
             return getAllMatieres();

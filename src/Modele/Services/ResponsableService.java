@@ -24,4 +24,8 @@ public class ResponsableService {
     }
 
     public ArrayList<Responsable> getAllResponsables() { return dao.findAll(); }
+
+    public boolean persist(Responsable r) {
+        return dao.update(r);
+    }
 }

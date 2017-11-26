@@ -18,4 +18,8 @@ public class ClasseService {
     }
 
     public ArrayList<Classe> getAllClasses() { return dao.findAll(); }
+
+    public boolean persist(Classe c) {
+        return dao.update(c);
+    }
 }

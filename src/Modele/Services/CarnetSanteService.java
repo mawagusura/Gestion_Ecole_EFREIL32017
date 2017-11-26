@@ -15,4 +15,8 @@ public class CarnetSanteService {
         return dao.find(id);
     }
 
+    public boolean persist(Carnet_sante c) {
+        return dao.update(c);
+    }
+
 }
