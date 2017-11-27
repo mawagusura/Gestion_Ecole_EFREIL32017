@@ -49,7 +49,7 @@ public class EleveDAO extends DAO<Eleve>{
                     "id_classe = ?," +
                     "id_coord = ?," +
                     "id_sante = ?," +
-                    "ville_naissance = ?," +
+                    "ville_naissance = ?" +
                     "where matricule = " + obj.getMatricule() ;
 
             PreparedStatement preparedStmt = connect.prepareStatement(query);
@@ -63,7 +63,7 @@ public class EleveDAO extends DAO<Eleve>{
             preparedStmt.setInt(8, obj.getClasse().getId_classe());
             preparedStmt.setInt(9, obj.getCoord().getId_coord());
             preparedStmt.setInt(10, obj.getSante().getId_sante());
-            preparedStmt.setString(11, obj.getPays_naissance());
+            preparedStmt.setString(11, obj.getVille_naissance());
 
             // Exécution
             preparedStmt.executeUpdate();

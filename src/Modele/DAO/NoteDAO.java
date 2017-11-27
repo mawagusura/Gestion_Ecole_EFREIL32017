@@ -57,7 +57,7 @@ public class NoteDAO extends DAO<Note> {
                     "coefficient = ?," +
                     "matricule = ?," +
                     "id_matiere = ?," +
-                    "note = ?" +
+                    "note = ? " +
                     "where id_note = " + obj.getId_note();
 
             PreparedStatement preparedStmt = connect.prepareStatement(query);

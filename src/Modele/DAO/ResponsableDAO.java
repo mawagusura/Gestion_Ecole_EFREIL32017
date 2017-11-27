@@ -43,7 +43,7 @@ public class ResponsableDAO extends DAO<Responsable> {
                     "adresse = ?," +
                     "telephone = ?," +
                     "mail = ?," +
-                    "id_eleve = ?," +
+                    "id_eleve = ? " +
                     "where id_responsable = " + obj.getId_responsable();
 
             PreparedStatement preparedStmt = connect.prepareStatement(query);

@@ -37,7 +37,7 @@ public class NiveauDAO extends DAO<Niveau_classe>{
         try {
             // Préparation du statement
             String query = "update Niveau_classe set " +
-                    "nom = ?," +
+                    "nom = ? " +
                     "where id_niveau = " + obj.getId_niveau();
 
             PreparedStatement preparedStmt = connect.prepareStatement(query);

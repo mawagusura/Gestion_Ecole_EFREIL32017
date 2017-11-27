@@ -39,7 +39,7 @@ public class ClasseDAO extends DAO<Classe> {
             // Préparation du statement
             String query = "update Classe set " +
                     "nom = ?," +
-                    "id_niveau = ?," +
+                    "id_niveau = ? " +
                     "where id_classe = " + obj.getId_classe();
 
             PreparedStatement preparedStmt = connect.prepareStatement(query);

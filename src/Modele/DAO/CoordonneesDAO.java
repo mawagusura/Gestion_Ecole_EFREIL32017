@@ -42,7 +42,7 @@ public class CoordonneesDAO extends DAO<Coordonnees> {
                     "ville = ?," +
                     "tel_fixe = ?," +
                     "tel_mobile = ?," +
-                    "mail = ?," +
+                    "mail = ? " +
                     "where id_coord = " + obj.getId_coord();
 
             PreparedStatement preparedStmt = connect.prepareStatement(query);

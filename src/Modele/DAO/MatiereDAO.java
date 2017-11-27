@@ -39,7 +39,7 @@ public class MatiereDAO extends DAO<Matiere> {
         try {
             // Préparation du statement
             String query = "update Matiere set " +
-                    "nom_matiere = ?," +
+                    "nom_matiere = ? " +
                     "where id_matiere = " + obj.getId_matiere();
 
             PreparedStatement preparedStmt = connect.prepareStatement(query);

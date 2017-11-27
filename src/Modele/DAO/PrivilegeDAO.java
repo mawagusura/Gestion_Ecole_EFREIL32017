@@ -37,7 +37,7 @@ public class PrivilegeDAO extends DAO<Privilege> {
         try {
             // Préparation du statement
             String query = "update privilege set " +
-                    "libelle = ?," +
+                    "libelle = ? " +
                     "where id_privilege = " + obj.getId_privilege();
 
             PreparedStatement preparedStmt = connect.prepareStatement(query);

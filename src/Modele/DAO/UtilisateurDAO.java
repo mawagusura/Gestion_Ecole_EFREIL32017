@@ -43,7 +43,7 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
                     "nom = ?," +
                     "prenom = ?," +
                     "hash_mdp = ?," +
-                    "id_privilege = ?," +
+                    "id_privilege = ? " +
                     "where id_utilisateur = " + obj.getId_utilisateur();
 
             PreparedStatement preparedStmt = connect.prepareStatement(query);
