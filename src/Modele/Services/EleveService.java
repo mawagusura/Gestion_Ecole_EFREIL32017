@@ -42,6 +42,10 @@ public class EleveService {
         return dao.delete(e);
     }
 
+    public ArrayList<Eleve> getEleves(int matricule, String str) {
+        return dao.find(matricule, str);
+    }
+
     public ArrayList<Eleve> getEleves(Classe c, Matiere m) {
         if(c == null && m==null){
             return dao.findAll();
