@@ -8,6 +8,7 @@ import Modele.JavaBean.Utilisateur;
 import Modele.Services.ClasseService;
 import Modele.Services.EleveService;
 import Modele.Services.MatiereService;
+import Modele.ViewModel.AcaModel;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -25,15 +26,20 @@ public class MainFrame extends JFrame {
      */
     private JTabbedPane onglet = new JTabbedPane();
     private JTable tableau;
+    private JTable tableau2;
     private JComboBox<Classe> comboC;
     private JComboBox<Matiere> comboM;
+    private JTextField texte;
 
     /**
      * Data Related attributes
      */
     private final Controller controller;
     private final Utilisateur utilisateur;
+    private ArrayList<Eleve> elevesAdmin;
+    private ArrayList<Eleve> elevesAca;
     private final String noms[] = {"Prénom","Nom","Sexe","Classe"};
+    private final String noms2[] = {"Prénom","Nom","Sexe","Date Inscription"};
 
 
     public MainFrame(Controller controller, Utilisateur user){
@@ -52,7 +58,6 @@ public class MainFrame extends JFrame {
         this.controller = controller;
 
         JPanel aca = new JPanel();
-        JPanel admin = new JPanel();
 
         // Panel académique
         JPanel bl = new JPanel();
@@ -63,7 +68,7 @@ public class MainFrame extends JFrame {
         bl.add(titre,BorderLayout.WEST);
         bl.add(util,BorderLayout.EAST);
 
-        Box boutons = Box.createHorizontalBox();
+        JPanel boutons = new JPanel();
         JPanel classe = new JPanel();
         JPanel matiere = new JPanel();
 
@@ -74,7 +79,7 @@ public class MainFrame extends JFrame {
             modify.addActionListener(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    handleClick(1);
+                    handleClick(1,1);
                 }
             });
         }
@@ -83,7 +88,7 @@ public class MainFrame extends JFrame {
             modify.addActionListener(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    handleClick(0);
+                    handleClick(0,1);
                 }
             });
         }
@@ -126,7 +131,6 @@ public class MainFrame extends JFrame {
         boutons.add(modify);
 
         // Génération Grille
-
         this.tableau = new JTable();
         this.controller.handleComboChange(this);
         tableau.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -136,28 +140,104 @@ public class MainFrame extends JFrame {
         aca.add(bl);
         aca.add(boutons);
         aca.add(grille);
-        // Panel administratif
-
-
-
-
         onglet.addTab("Gestion académique",aca);
-        onglet.addTab("Gestion administrative",admin);
+
+        drawAdmin();
+
         this.getContentPane().add(onglet);
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
+    }
+
+    public void drawAdmin(){
+
+        JPanel admin = new JPanel();
+
+        JPanel bl = new JPanel();
+        bl.setLayout(new BorderLayout());
+        JLabel titre = new JLabel("Liste des élèves");
+        JLabel util = new JLabel("Connecté en tant que : "+this.utilisateur.getNom()+" "+this.utilisateur.getPrenom());
+
+        bl.add(titre,BorderLayout.WEST);
+        bl.add(util,BorderLayout.EAST);
+
+        JPanel boutons = new JPanel();
+
+        JPanel search = new JPanel();
+        JButton b = new JButton("Rechercher");
+        b.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handleSearch();
+            }
+        });
+        this.texte = new JTextField();
+        this.texte.setPreferredSize(new Dimension(100,20));
+
+        search.add(b);
+        search.add(this.texte);
+
+        boutons.add(search);
+        // event listener bouton modifier / consulter
+        JButton modify;
+        if(this.utilisateur.getPrivilege().getId_privilege()==1){
+            modify = new JButton("Modifier / Consulter l'élève");
+            modify.addActionListener(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    handleClick(1,0);
+                }
+            });
+        }
+        else{
+            modify = new JButton("Consulter l'élève");
+            modify.addActionListener(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    handleClick(0,0);
+                }
+            });
+        }
+
+        // Panel administratif
+        this.tableau2 = new JTable();
+
+        this.controller.updateTabAdmin(this);
+
+        tableau2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        JScrollPane grille2 = new JScrollPane(tableau2);
+
+        boutons.add(modify);
+        admin.setLayout(new BoxLayout(admin,BoxLayout.PAGE_AXIS));
+        admin.add(bl);
+        admin.add(boutons);
+
+        admin.add(grille2);
+
+        onglet.addTab("Gestion administrative",admin);
+
+    }
+
+    private void handleSearch(){
+        this.controller.updateTabAdmin(this);
     }
 
     private void handleClosing(){
         this.controller.handleClosing(this);
     }
 
-    private void handleClick(int privilege){
-        this.controller.handleClickUser(this,privilege);
+    private void handleClick(int privilege, int type){
+        this.controller.handleClickUser(this,privilege,type);
     }
 
     private void handleComboChange(){
         this.controller.handleComboChange(this);
     }
+
+    /**
+     * Getters & setters
+     * @return
+     */
 
     public JTabbedPane getOnglet() {
         return onglet;
@@ -198,5 +278,33 @@ public class MainFrame extends JFrame {
 
     public String[] getNoms() {
         return noms;
+    }
+
+    public JTable getTableau2() {
+        return tableau2;
+    }
+
+    public JTextField getTexte() {
+        return texte;
+    }
+
+    public ArrayList<Eleve> getElevesAdmin() {
+        return elevesAdmin;
+    }
+
+    public ArrayList<Eleve> getElevesAca() {
+        return elevesAca;
+    }
+
+    public void setElevesAdmin(ArrayList<Eleve> elevesAdmin) {
+        this.elevesAdmin = elevesAdmin;
+    }
+
+    public void setElevesAca(ArrayList<Eleve> elevesAca) {
+        this.elevesAca = elevesAca;
+    }
+
+    public String[] getNoms2() {
+        return noms2;
     }
 }

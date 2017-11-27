@@ -11,20 +11,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
-public class SecondaryFrame extends JFrame {
+public class SecondaryFrame extends AbstractPopup {
 
-    private final Eleve eleve;
-    private final int privilege;
-    private final Controller controller;
+
     private  JTable tableau;
     private final String[] noms ={"Matiere", "Moyenne", "Coefficient"};
-    JComboBox<Classe> classe;
+    private JComboBox<Classe> classe;
 
-    public SecondaryFrame(int privilege, Eleve eleve, Controller controller){
+    public SecondaryFrame(int privilege, Eleve eleve, Controller controller, MainFrame mainFrame){
 
-        this.eleve =eleve;
-        this.privilege = privilege;
-        this.controller = controller;
+        super(privilege,eleve,controller,mainFrame);
 
         JPanel mainPanel = new JPanel();
         GridLayout gl = new GridLayout();
@@ -63,6 +59,14 @@ public class SecondaryFrame extends JFrame {
                 }
             });
             b1.add(p2);
+            JButton p3 = new JButton("Supprimer une matière");
+            p3.addActionListener(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    handleSupprMatiere();
+                }
+            });
+            b1.add(p3);
             JButton valider = new JButton("Valider les modifications");
             valider.addActionListener(new AbstractAction() {
                 @Override
@@ -84,9 +88,6 @@ public class SecondaryFrame extends JFrame {
         mainPanel.add(b1);
         this.getContentPane().add(mainPanel);
 
-        this.setTitle(eleve.getNom()+ " " + eleve.getPrenom());
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setSize(500,250);
         this.setVisible(true);
     }
 
@@ -109,20 +110,16 @@ public class SecondaryFrame extends JFrame {
     }
 
     private void handleValidation(){
-        this.controller.handleValidation(this);
+        this.controller.handleValidation(this, false);
+    }
+
+    private void handleSupprMatiere(){
+        this.controller.handleSupprMatiere(this);
     }
 
     /**
      * getters and setters
      */
-    public Eleve getEleve() {
-        return eleve;
-    }
-
-    public int getPrivilege() {
-        return privilege;
-    }
-
     public JTable getTableau() {
         return tableau;
     }

@@ -2,10 +2,8 @@ package Controller;
 
 import Modele.JavaBean.*;
 import Modele.Services.*;
-import View.LoginView;
-import View.MainFrame;
+import View.*;
 import Modele.ViewModel.*;
-import View.SecondaryFrame;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -77,21 +75,28 @@ public class Controller {
 
         if(option == JOptionPane.OK_OPTION){
             main.dispose();
+            exit(0);
         }
-        exit(0);
     }
 
     /**
      * Méthode gérant le clic sur le bouton Modifier / consulter.
      * Lance une nouvelle fenêtre si une ligne du tableau est sélectionnée.
      */
-    public void handleClickUser(MainFrame main, int privilege){
-        if(main.getTableau().getSelectedRow()!= -1) {
-            String prenom = (String) main.getTableau().getModel().getValueAt(main.getTableau().getSelectedRow(),0);
-            String nom = (String) main.getTableau().getModel().getValueAt(main.getTableau().getSelectedRow(),1);
-            Eleve e = this.eleveService.getEleve(nom,prenom);
+    public void handleClickUser(MainFrame main, int privilege, int type){
+        if(type ==1 && main.getTableau().getSelectedRow()!= -1) {
+            //String prenom = (String) main.getTableau().getModel().getValueAt(main.getTableau().getSelectedRow(),0);
+            //String nom = (String) main.getTableau().getModel().getValueAt(main.getTableau().getSelectedRow(),1);
+            Eleve e = main.getElevesAca().get(main.getTableau().getSelectedRow());
 
-            SecondaryFrame sec = new SecondaryFrame(privilege,e,this);
+            SecondaryFrame sec = new SecondaryFrame(privilege,e,this, main);
+        }
+        else if(type==0 && main.getTableau2().getSelectedRow()!=-1){
+            //String prenom = (String) main.getTableau2().getModel().getValueAt(main.getTableau().getSelectedRow(),0);
+            //String nom = (String) main.getTableau2().getModel().getValueAt(main.getTableau().getSelectedRow(),1);
+            Eleve e = main.getElevesAdmin().get(main.getTableau2().getSelectedRow());
+
+            ConsultView c = new ConsultView(privilege,e,this,main);
         }
         else{
             JOptionPane jop = new JOptionPane();
@@ -107,12 +112,12 @@ public class Controller {
         Classe currC =(Classe) main.getComboC().getSelectedItem();
         Matiere currM = (Matiere) main.getComboM().getSelectedItem();
 
-        ArrayList<Eleve> eleves = this.eleveService.getEleves(currC,currM);
+        main.setElevesAca( this.eleveService.getEleves(currC,currM));
 
-        Object[][] data = new Object[eleves.size()][4];
+        Object[][] data = new Object[main.getElevesAca().size()][4];
 
-        for(int i=0;i<eleves.size();i++){
-            Eleve e = eleves.get(i);
+        for(int i=0;i<main.getElevesAca().size();i++){
+            Eleve e = main.getElevesAca().get(i);
             data[i][0] = e.getPrenom();
             data[i][1] = e.getNom();
             data[i][2] = e.getSexe() == 1 ? "Homme" : "Femme";
@@ -123,11 +128,30 @@ public class Controller {
     }
 
     /**
+     * Update le tableau administratif
+     * @param main
+     */
+    public void updateTabAdmin(MainFrame main){
+        main.setElevesAdmin( this.getEleveService().getEleves(main.getTexte().getText()));
+
+        Object[][] data = new Object[main.getElevesAdmin().size()][4];
+
+        for(int i=0;i<main.getElevesAdmin().size();i++){
+            Eleve e = main.getElevesAdmin().get(i);
+            data[i][0] = e.getPrenom();
+            data[i][1] = e.getNom();
+            data[i][2] = e.getSexe() == 1 ? "Homme" : "Femme";
+            data[i][3] = e.getDate_inscription();
+        }
+
+        main.getTableau2().setModel(new AcaModel(data,main.getNoms2()));
+    }
+
+    /**
      * Méthode qui gère l'ajout d'une matière à un élève.
      * @return
      */
     public void handleAjoutMatiere(SecondaryFrame s){
-        Object[] possibilities = {"ham", "spam", "yam"};
         Matiere m = (Matiere) JOptionPane.showInputDialog(
                 s,
                 "Veuillez sélectionner une matière à ajouter à l'élève :\n",
@@ -152,27 +176,71 @@ public class Controller {
      * Gère la modification des données d'un élève
      * @return
      */
-    public void handleValidation(SecondaryFrame s) {
+    public void handleValidation(AbstractPopup ab, boolean isAdmin) {
 
+        if(!isAdmin) {
+            SecondaryFrame s = (SecondaryFrame) ab;
+            //loop tableau
+            for (int i = 1; i < this.matiereService.getMatieres(s.getEleve()).size(); i++) {
+                Note temp = this.noteService.getNote(
+                        s.getEleve(),
+                        (Matiere) s.getTableau().getModel().getValueAt(i, 0));
+                temp.setNote(Float.parseFloat(String.valueOf(s.getTableau().getValueAt(i, 1))));
+                temp.setCoefficient(Float.parseFloat(String.valueOf(s.getTableau().getModel().getValueAt(i, 2))));
+                this.noteService.persist(temp);
+            }
 
-        //loop tableau
-        for(int i=1;i<this.matiereService.getMatieres(s.getEleve()).size();i++){
-            Note temp = this.noteService.getNote(
-                    s.getEleve(),
-                    (Matiere) s.getTableau().getModel().getValueAt(i,0));
-            temp.setNote(Float.parseFloat(String.valueOf(s.getTableau().getValueAt(i,1))));
-            temp.setCoefficient(Float.parseFloat(String.valueOf(s.getTableau().getModel().getValueAt(i,2))));
-            this.noteService.persist(temp);
+            s.getEleve().setClasse((Classe) s.getClasse().getSelectedItem());
+            this.eleveService.persist(s.getEleve());
+
+            s.dispose();
+            this.handleComboChange(s.getMainFrame());
         }
+        else{
+            ConsultView c = (ConsultView) ab;
+            Eleve e = c.getEleve();
 
-        s.getEleve().setClasse((Classe) s.getClasse().getSelectedItem());
-        this.eleveService.persist(s.getEleve());
+            e.setNom(c.getNom().getText());
+            e.setPrenom(c.getPrenom().getText());
 
+            this.eleveService.persist(e);
+            c.dispose();
+            this.updateTabAdmin(c.getMainFrame());
+        }
+    }
 
-        s.dispose();
+    /**
+     * Gère la validation des données administratives d'un élève
+     */
+    public void handleAdminInfos(){
 
     }
 
+    /**
+     * Gère la suppression d'une matière
+     * @return
+     */
+    public void handleSupprMatiere(SecondaryFrame s){
+        Matiere m = (Matiere) JOptionPane.showInputDialog(
+                s,
+                "Veuillez sélectionner une matière à supprimer :\n",
+                "Suppression Matière",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                this.matiereService.getMatieres(s.getEleve()).toArray(),
+                this.matiereService.getMatieres(s.getEleve()).get(0)
+        );
+
+        //If a string was returned, say so.
+        if ((m != null)) {
+
+            Note n = this.noteService.getNote(s.getEleve(),m);
+            if(n!=null){
+                this.noteService.persist_delete(n);
+            }
+            s.drawTableau();
+        }
+    }
 
 
     public EleveService getEleveService() {
