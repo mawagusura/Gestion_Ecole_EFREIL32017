@@ -9,9 +9,10 @@ import java.awt.event.ActionEvent;
 
 public class ConsultView extends AbstractPopup {
 
-    private final JTextField nom;
-    private final JTextField prenom;
-    private final JTextField adresse;
+    private final JTextField nom, prenom, adresse, ville_naissance, pays_naissance, date_inscription, etablissement_prec,
+    date_naissance;
+
+    private final JComboBox sexe;
 
     public ConsultView(int privilege, Eleve eleve, Controller controller, MainFrame mainFrame){
 
@@ -30,8 +31,32 @@ public class ConsultView extends AbstractPopup {
         this.prenom = new JTextField(this.eleve.getPrenom());
         mainPanel.add(this.prenom);
 
-        mainPanel.add(new JLabel("Adresse"));
+        mainPanel.add(new JLabel("Adresse :"));
         this.adresse = new JTextField(this.eleve.getCoord().getAdresse());
+        mainPanel.add(this.adresse);
+
+        mainPanel.add(new JLabel("Ville de naissance :"));
+        this.ville_naissance = new JTextField(this.eleve.getVille_naissance());
+        mainPanel.add(this.adresse);
+
+        mainPanel.add(new JLabel("Ville de naissance :"));
+        this.pays_naissance = new JTextField(this.eleve.getVille_naissance());
+        mainPanel.add(this.adresse);
+
+        mainPanel.add(new JLabel("Sexe :"));
+        this.sexe = new JComboBox();
+        mainPanel.add(this.adresse);
+
+        mainPanel.add(new JLabel("Date d'inscription :"));
+        this.date_inscription = new JTextField(this.eleve.getCoord().getAdresse());
+        mainPanel.add(this.adresse);
+
+        mainPanel.add(new JLabel("Etablissement précédent :"));
+        this.etablissement_prec = new JTextField(this.eleve.getCoord().getAdresse());
+        mainPanel.add(this.adresse);
+
+        mainPanel.add(new JLabel("Date de naissance :"));
+        this.date_naissance = new JTextField(this.eleve.getCoord().getAdresse());
         mainPanel.add(this.adresse);
 
         JPanel wrapper = new JPanel();
