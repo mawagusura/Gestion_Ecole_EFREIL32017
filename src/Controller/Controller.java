@@ -6,6 +6,7 @@ import View.*;
 import Modele.ViewModel.*;
 
 import javax.swing.*;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import static java.lang.System.exit;
@@ -200,9 +201,25 @@ public class Controller {
             ConsultView c = (ConsultView) ab;
             Eleve e = c.getEleve();
 
+            // On récupère les champs et on les mets dans l'élève
             e.setNom(c.getNom().getText());
             e.setPrenom(c.getPrenom().getText());
 
+            // on modifie les coordonées
+            Coordonnees co = e.getCoord();
+            co.setAdresse(c.getAdresse().getText());
+
+            // attribution du sexe
+            e.setSexe(c.getSexe().getSelectedItem().equals("Homme")?1:0);
+            e.setVille_naissance(c.getVille_naissance().getText());
+            Date d = Date.valueOf(c.getDate_inscription().getText());
+            if(d!=null) e.setDate_inscription(d);
+            d = Date.valueOf(c.getDate_naissance().getText());
+            if(d!=null) e.setDate_naissance(d);
+            e.setEtablissement_precedent(c.getEtablissement_prec().getText());
+
+            //persistance
+            this.coordonneesService.persist(co);
             this.eleveService.persist(e);
             c.dispose();
             this.updateTabAdmin(c.getMainFrame());

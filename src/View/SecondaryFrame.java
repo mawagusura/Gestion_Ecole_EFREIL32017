@@ -9,6 +9,7 @@ import Modele.ViewModel.AcaModel;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class SecondaryFrame extends AbstractPopup {
@@ -31,13 +32,11 @@ public class SecondaryFrame extends AbstractPopup {
         // Tableau
         this.tableau = new JTable();
         drawTableau();
-
         this.tableau.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane grille = new JScrollPane(tableau);
 
-
         // Paneau droite
-        Box b1 = Box.createVerticalBox();
+        JPanel b1 = new JPanel(new BorderLayout());
         JPanel p1 = new JPanel();
 
         //En fonction du privilège
@@ -48,7 +47,6 @@ public class SecondaryFrame extends AbstractPopup {
                 classe.addItem(c);
             }
             p1.add(classe);
-            b1.add(p1);
 
             JButton p2 = new JButton("Ajouter une matière à l'élève");
             p2.addActionListener(new AbstractAction() {
@@ -58,7 +56,7 @@ public class SecondaryFrame extends AbstractPopup {
 
                 }
             });
-            b1.add(p2);
+            p1.add(p2);
             JButton p3 = new JButton("Supprimer une matière");
             p3.addActionListener(new AbstractAction() {
                 @Override
@@ -66,7 +64,8 @@ public class SecondaryFrame extends AbstractPopup {
                     handleSupprMatiere();
                 }
             });
-            b1.add(p3);
+            p1.add(p3);
+            b1.add(p1,BorderLayout.CENTER);
             JButton valider = new JButton("Valider les modifications");
             valider.addActionListener(new AbstractAction() {
                 @Override
@@ -74,17 +73,22 @@ public class SecondaryFrame extends AbstractPopup {
                     handleValidation();
                 }
             });
-            b1.add(new JLabel("Moyenne générale : "+this.controller.getNoteService().getMoyenne(this.eleve)));
-            b1.add(valider);
+            b1.add(valider,BorderLayout.SOUTH);
         }
         else{
             JLabel classe2 = new JLabel(this.eleve.getClasse().getNom());
             p1.add(classe2);
             b1.add(p1);
-            b1.add(new JLabel("Moyenne générale : "+this.controller.getNoteService().getMoyenne(this.eleve)));
         }
 
-        mainPanel.add(grille);
+
+        JPanel wrap = new JPanel();
+        wrap.setLayout(new GridLayout(2,1));
+        wrap.add(grille);
+        JPanel temp = new JPanel();
+        temp.add(new JLabel("Moyenne générale : "+ new DecimalFormat("#.##").format(this.controller.getNoteService().getMoyenne(this.eleve))));
+        wrap.add(temp);
+        mainPanel.add(wrap);
         mainPanel.add(b1);
         this.getContentPane().add(mainPanel);
 

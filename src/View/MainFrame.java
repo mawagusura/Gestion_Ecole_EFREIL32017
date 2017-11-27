@@ -5,13 +5,7 @@ import Modele.JavaBean.Classe;
 import Modele.JavaBean.Eleve;
 import Modele.JavaBean.Matiere;
 import Modele.JavaBean.Utilisateur;
-import Modele.Services.ClasseService;
-import Modele.Services.EleveService;
-import Modele.Services.MatiereService;
-import Modele.ViewModel.AcaModel;
-
 import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -41,11 +35,14 @@ public class MainFrame extends JFrame {
     private final String noms[] = {"Prénom","Nom","Sexe","Classe"};
     private final String noms2[] = {"Prénom","Nom","Sexe","Date Inscription"};
 
-
+    /**
+     * Constructeur qui dessine la fenetre principale
+     * @param controller
+     * @param user
+     */
     public MainFrame(Controller controller, Utilisateur user){
 
         this.utilisateur = user;
-
         this.setTitle("SchoolAdmin");
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowAdapter() {
@@ -54,19 +51,17 @@ public class MainFrame extends JFrame {
                 handleClosing();
             }
         });
-        this.setSize(1300, 600);
+        this.setSize(900, 400);
         this.controller = controller;
 
         JPanel aca = new JPanel();
 
         // Panel académique
         JPanel bl = new JPanel();
-        bl.setLayout(new BorderLayout());
         JLabel titre = new JLabel("Liste des élèves");
         JLabel util = new JLabel("Connecté en tant que : "+this.utilisateur.getNom()+" "+this.utilisateur.getPrenom());
 
-        bl.add(titre,BorderLayout.WEST);
-        bl.add(util,BorderLayout.EAST);
+        bl.add(titre);
 
         JPanel boutons = new JPanel();
         JPanel classe = new JPanel();
@@ -142,9 +137,19 @@ public class MainFrame extends JFrame {
         aca.add(grille);
         onglet.addTab("Gestion académique",aca);
 
+
         drawAdmin();
 
-        this.getContentPane().add(onglet);
+        // bas de page et construction panel
+        JPanel wrapper = new JPanel();
+        wrapper.setLayout(new BorderLayout());
+        JPanel pan = new JPanel();
+        pan.setPreferredSize(new Dimension(100,30));
+        pan.add(util);
+        wrapper.add(onglet,BorderLayout.CENTER);
+        wrapper.add(pan,BorderLayout.PAGE_END);
+
+        this.getContentPane().add(wrapper);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
@@ -154,12 +159,10 @@ public class MainFrame extends JFrame {
         JPanel admin = new JPanel();
 
         JPanel bl = new JPanel();
-        bl.setLayout(new BorderLayout());
-        JLabel titre = new JLabel("Liste des élèves");
-        JLabel util = new JLabel("Connecté en tant que : "+this.utilisateur.getNom()+" "+this.utilisateur.getPrenom());
 
-        bl.add(titre,BorderLayout.WEST);
-        bl.add(util,BorderLayout.EAST);
+        JLabel titre = new JLabel("Liste des élèves");
+
+        bl.add(titre);
 
         JPanel boutons = new JPanel();
 

@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 
 public class ConsultView extends AbstractPopup {
 
-    private final JTextField nom, prenom, adresse, ville_naissance, pays_naissance, date_inscription, etablissement_prec,
+    private final JTextField nom, prenom, adresse, ville_naissance, date_inscription, etablissement_prec,
     date_naissance;
 
     private final JComboBox sexe;
@@ -25,39 +25,45 @@ public class ConsultView extends AbstractPopup {
         //Textfields
         mainPanel.add(new JLabel("Nom :"));
         this.nom = new JTextField(this.eleve.getNom());
+        this.nom.setPreferredSize(new Dimension(100,30));
         mainPanel.add(this.nom);
 
         mainPanel.add(new JLabel("Prénom : "));
         this.prenom = new JTextField(this.eleve.getPrenom());
+        this.prenom.setPreferredSize(new Dimension(100,30));
         mainPanel.add(this.prenom);
 
         mainPanel.add(new JLabel("Adresse :"));
         this.adresse = new JTextField(this.eleve.getCoord().getAdresse());
+        this.adresse.setPreferredSize(new Dimension(100,30));
         mainPanel.add(this.adresse);
 
         mainPanel.add(new JLabel("Ville de naissance :"));
         this.ville_naissance = new JTextField(this.eleve.getVille_naissance());
-        mainPanel.add(this.adresse);
-
-        mainPanel.add(new JLabel("Ville de naissance :"));
-        this.pays_naissance = new JTextField(this.eleve.getVille_naissance());
-        mainPanel.add(this.adresse);
+        this.ville_naissance.setPreferredSize(new Dimension(100,30));
+        mainPanel.add(this.ville_naissance);
 
         mainPanel.add(new JLabel("Sexe :"));
         this.sexe = new JComboBox();
-        mainPanel.add(this.adresse);
+        this.sexe.addItem("Homme");
+        this.sexe.addItem("Femme");
+        this.sexe.setSelectedItem(this.eleve.getSexe()==1 ? "Homme" : "Femme");
+        this.sexe.setPreferredSize(new Dimension(100,30));
+        mainPanel.add(this.sexe);
 
         mainPanel.add(new JLabel("Date d'inscription :"));
-        this.date_inscription = new JTextField(this.eleve.getCoord().getAdresse());
-        mainPanel.add(this.adresse);
+        this.date_inscription = new JTextField(this.eleve.getDate_inscription().toString());
+        this.date_inscription.setPreferredSize(new Dimension(100,30));
+        mainPanel.add(this.date_inscription);
 
         mainPanel.add(new JLabel("Etablissement précédent :"));
-        this.etablissement_prec = new JTextField(this.eleve.getCoord().getAdresse());
-        mainPanel.add(this.adresse);
+        this.etablissement_prec = new JTextField(this.eleve.getEtablissement_precedent());
+        this.etablissement_prec.setPreferredSize(new Dimension(100,20));
+        mainPanel.add(this.etablissement_prec);
 
         mainPanel.add(new JLabel("Date de naissance :"));
-        this.date_naissance = new JTextField(this.eleve.getCoord().getAdresse());
-        mainPanel.add(this.adresse);
+        this.date_naissance = new JTextField(this.eleve.getDate_naissance().toString());
+        mainPanel.add(this.date_naissance);
 
         JPanel wrapper = new JPanel();
         wrapper.add(mainPanel);
@@ -71,7 +77,9 @@ public class ConsultView extends AbstractPopup {
                     handleValidation();
                 }
             });
-            wrapper.add(b);
+            JPanel jpp = new JPanel();
+            jpp.add(b);
+            wrapper.add(jpp);
         }
         else{
             disableAll();
@@ -103,5 +111,25 @@ public class ConsultView extends AbstractPopup {
 
     public JTextField getAdresse() {
         return adresse;
+    }
+
+    public JTextField getVille_naissance() {
+        return ville_naissance;
+    }
+
+    public JTextField getDate_inscription() {
+        return date_inscription;
+    }
+
+    public JTextField getEtablissement_prec() {
+        return etablissement_prec;
+    }
+
+    public JTextField getDate_naissance() {
+        return date_naissance;
+    }
+
+    public JComboBox getSexe() {
+        return sexe;
     }
 }
