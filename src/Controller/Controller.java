@@ -161,7 +161,7 @@ public class Controller {
                     s.getEleve(),
                     (Matiere) s.getTableau().getModel().getValueAt(i,0));
             temp.setNote(Float.parseFloat(String.valueOf(s.getTableau().getValueAt(i,1))));
-            temp.setCoefficient((Float) s.getTableau().getModel().getValueAt(i,2));
+            temp.setCoefficient(Float.parseFloat(String.valueOf(s.getTableau().getModel().getValueAt(i,2))));
             this.noteService.persist(temp);
         }
 
