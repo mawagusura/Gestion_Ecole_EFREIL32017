@@ -143,7 +143,7 @@ public class Controller {
             Note n = new Note();
             n.setEleve(s.getEleve());
             n.setMatiere(m);
-            this.noteService.persist(n);
+            this.noteService.persist_new(n);
             s.drawTableau();
         }
     }
@@ -159,11 +159,18 @@ public class Controller {
         for(int i=1;i<this.matiereService.getMatieres(s.getEleve()).size();i++){
             Note temp = this.noteService.getNote(
                     s.getEleve(),
-                    this.matiereService.getMatiere((String) s.getTableau().getModel().getValueAt(i,0)));
-            temp.setNote(Float.parseFloat((String) s.getTableau().getModel().getValueAt(i,1)));
-            temp.setCoefficient(Float.parseFloat((String) s.getTableau().getModel().getValueAt(i,2)));
+                    (Matiere) s.getTableau().getModel().getValueAt(i,0));
+            temp.setNote(Float.parseFloat(String.valueOf(s.getTableau().getValueAt(i,1))));
+            temp.setCoefficient((Float) s.getTableau().getModel().getValueAt(i,2));
             this.noteService.persist(temp);
         }
+
+        s.getEleve().setClasse((Classe) s.getClasse().getSelectedItem());
+        this.eleveService.persist(s.getEleve());
+
+
+        s.dispose();
+
     }
 
 

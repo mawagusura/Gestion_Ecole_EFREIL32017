@@ -37,6 +37,7 @@ public class AcaModel extends AbstractTableModel {
     @Override
     public void setValueAt(Object value, int row, int col) {
         data[row][col] = value;
+        fireTableCellUpdated(row, col);
     }
 
     //Retourne le nombre de colonnes

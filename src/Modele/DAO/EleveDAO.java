@@ -50,7 +50,7 @@ public class EleveDAO extends DAO<Eleve>{
                     "id_coord = ?," +
                     "id_sante = ?," +
                     "ville_naissance = ?," +
-                    "where matricule = " + obj.getMatricule();
+                    "where matricule = " + obj.getMatricule() ;
 
             PreparedStatement preparedStmt = connect.prepareStatement(query);
             preparedStmt.setString(1, obj.getPays_naissance());

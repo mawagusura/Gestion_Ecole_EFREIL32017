@@ -18,6 +18,7 @@ public class SecondaryFrame extends JFrame {
     private final Controller controller;
     private  JTable tableau;
     private final String[] noms ={"Matiere", "Moyenne", "Coefficient"};
+    JComboBox<Classe> classe;
 
     public SecondaryFrame(int privilege, Eleve eleve, Controller controller){
 
@@ -46,7 +47,7 @@ public class SecondaryFrame extends JFrame {
         //En fonction du privilège
         p1.add(new JLabel("Classe : "));
         if(privilege==1){
-            JComboBox<Classe> classe = new JComboBox<>();
+            this.classe = new JComboBox<>();
             for( Classe c : this.controller.getClasseService().getAllClasses()){
                 classe.addItem(c);
             }
@@ -58,6 +59,7 @@ public class SecondaryFrame extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     handleAjoutMatiere();
+
                 }
             });
             b1.add(p2);
@@ -72,8 +74,8 @@ public class SecondaryFrame extends JFrame {
             b1.add(valider);
         }
         else{
-            JLabel classe = new JLabel(this.eleve.getClasse().getNom());
-            p1.add(classe);
+            JLabel classe2 = new JLabel(this.eleve.getClasse().getNom());
+            p1.add(classe2);
             b1.add(p1);
             b1.add(new JLabel("Moyenne générale : "+this.controller.getNoteService().getMoyenne(this.eleve)));
         }
@@ -94,8 +96,8 @@ public class SecondaryFrame extends JFrame {
 
         for(int i=0;i<matieres.size();i++){
             Matiere e = matieres.get(i);
-            data[i][0] = e.getNom_matiere();
-            data[i][1] = this.controller.getNoteService().getNote(this.eleve,e);
+            data[i][0] = e;
+            data[i][1] = this.controller.getNoteService().getNote(this.eleve,e).getNote();
             data[i][2] = this.controller.getNoteService().getNote(this.eleve,e).getCoefficient();
         }
 
@@ -127,5 +129,9 @@ public class SecondaryFrame extends JFrame {
 
     public String[] getNoms() {
         return noms;
+    }
+
+    public JComboBox<Classe> getClasse() {
+        return classe;
     }
 }
